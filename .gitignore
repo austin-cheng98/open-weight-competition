@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+data/raw/
+paper/build/
+figures/*.png
+.DS_Store
