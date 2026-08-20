@@ -1,0 +1,255 @@
+{
+ "elasticity": [
+  {
+   "spec": "fixed-weight price",
+   "beta": -0.5336135449747252,
+   "se": 0.10159193118842526,
+   "n": 19803,
+   "models": 634
+  },
+  {
+   "spec": "input price",
+   "beta": -0.5256099599776233,
+   "se": 0.096465317178793,
+   "n": 19803,
+   "models": 634
+  },
+  {
+   "spec": "output price",
+   "beta": -0.4850384133416093,
+   "se": 0.10895102441834689,
+   "n": 19803,
+   "models": 634
+  },
+  {
+   "spec": "realised blended price",
+   "beta": -0.6583810001072192,
+   "se": 0.09538007842903438,
+   "n": 19803,
+   "models": 634
+  },
+  {
+   "spec": "requests",
+   "beta": -0.4625599436440168,
+   "se": 0.08655629470039425,
+   "n": 19803,
+   "models": 634
+  },
+  {
+   "spec": "weekly captures only",
+   "beta": -0.47209654114750504,
+   "se": 0.12321077719946567,
+   "n": 15133,
+   "models": 432
+  },
+  {
+   "spec": "trailing captures only",
+   "beta": -0.4761170904559615,
+   "se": 0.12451530047628692,
+   "n": 4670,
+   "models": 428
+  },
+  {
+   "spec": "open-weight models",
+   "beta": -0.5816021168555827,
+   "se": 0.11607618260673312,
+   "n": 8873,
+   "models": 321
+  },
+  {
+   "spec": "proprietary models",
+   "beta": -0.534283993540711,
+   "se": 0.2038077365341011,
+   "n": 10930,
+   "models": 316
+  },
+  {
+   "spec": "2025 onwards",
+   "beta": -0.5268744225738154,
+   "se": 0.10046072603695333,
+   "n": 7906,
+   "models": 542
+  }
+ ],
+ "diversion": [
+  {
+   "distance": "Mahalanobis",
+   "exposure": "post_threat",
+   "beta": 0.009929603002258536,
+   "se": 0.06967991183725936,
+   "n": 11820
+  },
+  {
+   "distance": "Mahalanobis",
+   "exposure": "post_sim",
+   "beta": 0.01917549154218255,
+   "se": 0.11989679195939455,
+   "n": 11820
+  },
+  {
+   "distance": "Euclidean",
+   "exposure": "post_threat",
+   "beta": -0.005693627795633108,
+   "se": 0.04695829991206558,
+   "n": 11820
+  },
+  {
+   "distance": "Euclidean",
+   "exposure": "post_sim",
+   "beta": 0.0077178708084101755,
+   "se": 0.06468007786064696,
+   "n": 11820
+  },
+  {
+   "distance": "cosine",
+   "exposure": "post_threat",
+   "beta": 0.022348062815399427,
+   "se": 0.031369697518430925,
+   "n": 11820
+  },
+  {
+   "distance": "cosine",
+   "exposure": "post_sim",
+   "beta": 0.08264561511989875,
+   "se": 0.08567787025687773,
+   "n": 11820
+  }
+ ],
+ "successor": [
+  {
+   "spec": "baseline",
+   "beta": -0.5336135449747252,
+   "se": 0.10159193118842526,
+   "n": 19803
+  },
+  {
+   "spec": "with successor control",
+   "beta": -0.5336650751865949,
+   "se": 0.10156172295710171,
+   "n": 19803
+  },
+  {
+   "spec": "excluding successor windows",
+   "beta": -0.49893144732559624,
+   "se": 0.1227150859500282,
+   "n": 12361
+  }
+ ],
+ "successor_share": 0.37580164621521994,
+ "displacement_long": [
+  {
+   "event": "WizardLM-2 7B",
+   "date": "2024-04-16",
+   "incumbent_growth": -0.8970051000839284,
+   "market_growth": -0.8359408080228998
+  },
+  {
+   "event": "Mistral: Mixtral 8x22B Instruct",
+   "date": "2024-04-17",
+   "incumbent_growth": -0.5034280531062852,
+   "market_growth": -0.5032490230442946
+  },
+  {
+   "event": "Meta: Llama 3 8B Instruct",
+   "date": "2024-04-18",
+   "incumbent_growth": -0.5009101808908399,
+   "market_growth": -0.5010281759824287
+  },
+  {
+   "event": "DeepSeek V2.5",
+   "date": "2024-05-14",
+   "incumbent_growth": 0.41312330169119316,
+   "market_growth": 0.5036102650474581
+  },
+  {
+   "event": "Microsoft: Phi-3 Medium 128K Instruct",
+   "date": "2024-05-24",
+   "incumbent_growth": 1.3575539253289899,
+   "market_growth": 2.0432594534495157
+  },
+  {
+   "event": "Sao10k: Llama 3 Euryale 70B v2.1",
+   "date": "2024-06-18",
+   "incumbent_growth": 1.0879136283472146,
+   "market_growth": 1.5677374048752715
+  },
+  {
+   "event": "Google: Gemma 2 9B",
+   "date": "2024-06-28",
+   "incumbent_growth": 0.9897841883504866,
+   "market_growth": 1.5123821129890203
+  },
+  {
+   "event": "Mistral: Mistral Nemo",
+   "date": "2024-07-19",
+   "incumbent_growth": 0.8400781396630399,
+   "market_growth": 1.346651732521922
+  },
+  {
+   "event": "Qwen2.5 72B Instruct",
+   "date": "2024-09-19",
+   "incumbent_growth": 0.25297885109848967,
+   "market_growth": 0.518507602852162
+  },
+  {
+   "event": "Meta: Llama 3.2 3B Instruct",
+   "date": "2024-09-25",
+   "incumbent_growth": 0.05402598702162154,
+   "market_growth": 0.34406323698424857
+  },
+  {
+   "event": "NVIDIA: Llama 3.1 Nemotron 70B Instruct",
+   "date": "2024-10-15",
+   "incumbent_growth": 0.1501813336650618,
+   "market_growth": 0.4300946086287088
+  },
+  {
+   "event": "Qwen: QwQ 32B Preview",
+   "date": "2024-11-28",
+   "incumbent_growth": 0.3632310417516085,
+   "market_growth": 0.4231101142857855
+  },
+  {
+   "event": "Meta: Llama 3.3 70B Instruct",
+   "date": "2024-12-06",
+   "incumbent_growth": 0.184183907164712,
+   "market_growth": 0.26936061006751655
+  },
+  {
+   "event": "DeepSeek: DeepSeek V3",
+   "date": "2024-12-26",
+   "incumbent_growth": -0.17736319580737303,
+   "market_growth": -0.05084257160468751
+  },
+  {
+   "event": "DeepSeek: R1",
+   "date": "2025-01-20",
+   "incumbent_growth": -0.029297922846511896,
+   "market_growth": 0.563730096757549
+  },
+  {
+   "event": "AI21: Jamba 1.6 Large",
+   "date": "2025-03-13",
+   "incumbent_growth": 0.4876969188506257,
+   "market_growth": 1.0110628495664962
+  },
+  {
+   "event": "DeepSeek: DeepSeek V3 0324",
+   "date": "2025-03-24",
+   "incumbent_growth": 0.5390140996975725,
+   "market_growth": 1.1696843963742776
+  },
+  {
+   "event": "DeepSeek: DeepSeek Prover V2",
+   "date": "2025-04-30",
+   "incumbent_growth": 0.898292639676069,
+   "market_growth": 1.541093863113239
+  },
+  {
+   "event": "DeepSeek: R1 0528",
+   "date": "2025-05-28",
+   "incumbent_growth": -0.16170626875317237,
+   "market_growth": 1.0142679689928193
+  }
+ ]
+}
