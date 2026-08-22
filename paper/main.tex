@@ -37,6 +37,7 @@
 \newcommand{\HostsClosed}{3.0}
 \newcommand{\ChangeRate}{2.9}
 \newcommand{\NeverRepriced}{54}
+\newcommand{\MedianCut}{5}
 \newcommand{\MonthlyFreq}{12.6}
 \newcommand{\PriceDuration}{7.4}
 \newcommand{\CutShare}{58}
@@ -307,7 +308,7 @@ price changes \ChangeRate\% of the time. Over a model's observed life,
 \NeverRepriced\% of models never change price at all. The left panel of
 Figure~\ref{fig:prices} shows the survival of the launch price: \SurvSix\% of models
 are still at their launch price after six months and \SurvTwelve\% after a year.
-Conditional on a change, the median revision is a cut of about ten log points, and
+Conditional on a change, the median revision is a cut of about \MedianCut{} log points, and
 \CutShare\% of changes are cuts.
 
 Expressed the way the price-setting literature does, \MonthlyFreq\% of model-months
@@ -496,10 +497,13 @@ and predicts unmeasured quality about as strongly as it predicts serving cost: i
 data it correlates 0.65 with the capability index, and instrumenting with it moves the
 price coefficient from $-0.79$ under ordinary least squares to $-0.27$ despite a
 first-stage $F$ above 900, which is the signature of a violated exclusion restriction
-rather than of a corrected bias. We
-therefore fix $\beta_p = -1$, between the within-model estimate of Section~3.3 and the
-value near one reported by \citet{demirer2025}, and report every result across a range
-of $\sigma$.
+rather than of a corrected bias. We therefore fix $\beta_p = -1$ and report every
+result across a range of $\sigma$. That value is deliberately conservative: it exceeds
+in magnitude both the within-model estimate of Section~3.3 and the adjustment-corrected
+long-run elasticity of about $-0.6$ implied by \eqref{eq:accounting} below, and it is
+close to the value reported by \citet{demirer2025}. Because surplus enters as a log-sum
+divided by $|\beta_p|$, a larger magnitude yields a smaller dollar figure, so the
+choice understates rather than inflates what open weights are worth.
 
 \paragraph{Results.} Removing open-weight models from the choice set at posted prices,
 the average price paid per token rises from \$0.70 to \$1.80, an increase of
@@ -513,9 +517,8 @@ is weaker, ranging from \$3.9m to \$1.3m per day as $\sigma$ moves from 0 to 0.7
 outside option is taken to be, which is a modelling choice rather than a measurement:
 raising the outside share from the observed 2.4\% to 50\% raises the proportional
 surplus loss, from 21\% to 47\%, while lowering the dollar figure to \$1.0m per day.
-The price effect is invariant to both. The price effect is almost invariant
-to $\sigma$, because it is governed by the composition of the surviving choice set
-rather than by the strength of substitution. Concentration moves against the
+The price effect is invariant to both, because it is governed by the composition of
+the surviving choice set rather than by the strength of substitution. Concentration moves against the
 presumption that open weights fragment the market: the provider Herfindahl index rises
 from \CFhhiBase{} to \CFhhiCf{} when open models are removed, because open-weight
 volume is spread across more suppliers than the proprietary volume that replaces it.
@@ -566,15 +569,15 @@ a fraction $\phi$ of existing demand be revisited each period, whether because a
 workload is rebuilt or because a team re-evaluates its choice. Contestable demand is
 $(g + \phi) M_t$, and a model's volume evolves as
 \begin{equation}
-y_{j,t+1} = (1 - \phi)\, y_{jt} + \sigma_j \,(g + \phi)\, M_t ,
+y_{j,t+1} = (1 - \phi)\, y_{jt} + \omega_j \,(g + \phi)\, M_t ,
 \label{eq:accounting}
 \end{equation}
-where $\sigma_j$ is its share of contestable demand. Three implications follow.
-An incumbent loses volume only when $\sigma_j (g+\phi) M_t < \phi\, y_{jt}$, that
+where $\omega_j$ is its share of contestable demand. Three implications follow.
+An incumbent loses volume only when $\omega_j (g+\phi) M_t < \phi\, y_{jt}$, that
 is, when its share of contestable demand falls below $\phi/(g+\phi)$ times its
 share of the stock; with $g \approx 0.13$ per week in our window, an incumbent with an
 average share of new demand keeps growing. An entrant reaches a share of about
-$\sigma_k (g+\phi)/(1+g)$ after one period, so entrants can take a large share of
+$\omega_k (g+\phi)/(1+g)$ after one period, so entrants can take a large share of
 volume quickly without anyone shrinking. And a permanent price change reaches only the
 contestable margin, so the response measured $\tau$ periods out is attenuated by
 roughly $1 - (1-\phi-g)^{\tau}$ relative to its long-run value.

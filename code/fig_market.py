@@ -50,14 +50,19 @@ def main():
     ax.set_yscale("log")
     ax.set_xlabel("Capability index")
     ax.set_ylabel("Price ($ per million tokens)")
-    ax.legend(loc="upper left", handletextpad=0.4, borderpad=0.2)
-    for name, dx, dy in (("Claude Opus 5", 3, 1.35), ("DeepSeek V4 Flash 0731", -1, 0.45)):
+    ax.legend(loc="upper left", handletextpad=0.4, borderpad=0.2,
+              labelspacing=0.25)
+    for name, dx, dy, ha in (("Claude Opus 5", -8, 2.1, "center"),
+                             ("DeepSeek V4 Flash 0731", -13, 0.20, "center")):
         m = xs[xs.name.str.contains(name.split(" 0")[0], regex=False)]
         if len(m):
             m = m.iloc[0]
             ax.annotate(name, (m.q_index, m.p_blend), fontsize=6, color=style.MUTED,
-                        xytext=(m.q_index + dx, m.p_blend * dy),
-                        ha="center", zorder=5)
+                        xytext=(m.q_index + dx, m.p_blend * dy), ha=ha, zorder=5,
+                        arrowprops=dict(arrowstyle="-", lw=0.4, color=style.GREY,
+                                        shrinkA=1, shrinkB=2),
+                        bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none",
+                                  alpha=0.85))
 
     ax2 = axes[1]
     xs["release"] = pd.to_datetime(xs.created_at, format="mixed", utc=True).dt.tz_localize(None)
