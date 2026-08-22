@@ -48,10 +48,6 @@ def main():
     ax = axes[0]
     ax.plot(share.index, 100 * share.values, color=style.OPEN, lw=1.6,
             marker="o", ms=2.8)
-    ax.scatter([last], [100 * recent], color=style.INK, s=16, zorder=5)
-    ax.annotate("daily panel", (last, 100 * recent), fontsize=6, color=style.MUTED,
-                xytext=(-24, -12), textcoords="offset points", ha="center",
-                arrowprops=dict(arrowstyle="-", lw=0.4, color=style.GREY))
     ax.set_ylabel("Open-weight share of tokens (%)")
     ax.set_ylim(0, 100)
     ax.xaxis.set_major_locator(mdates.YearLocator())

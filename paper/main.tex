@@ -218,12 +218,12 @@ that weights can be downloaded and served by a third party \citep{kapoor2024,nti
 
 \subsection{Capability}
 
-Capability enters as a vector $q_j \in \mathbb{R}^M$ of third-party scores covering
-reasoning, coding and agentic use, supplemented by pairwise-comparison scores from a
-design-oriented arena in the spirit of \citet{chiang2024}. These measures are highly
-collinear. Standardising each dimension and writing $\Lambda$ for the covariance matrix
-of the standardised scores, the leading eigenvector $w$ of $\Lambda$ defines the scalar
-capability index
+Capability enters as a vector $q_j \in \mathbb{R}^M$ of third-party scores over $M$
+dimensions covering reasoning, coding and agentic use, supplemented by pairwise-comparison
+scores from a design-oriented arena in the spirit of \citet{chiang2024}. These measures are
+highly collinear. Writing $\bar q_m$ and $\varsigma_m$ for the mean and standard deviation of
+dimension $m$ across models, and $\Lambda$ for the covariance matrix of the standardised
+scores, the leading eigenvector $w$ of $\Lambda$ defines the capability index
 \begin{equation}
 Q_j = w' \tilde q_j , \qquad
 \tilde q_{jm} = (q_{jm} - \bar q_m) / \varsigma_m ,
@@ -334,15 +334,14 @@ shares describe who runs the world's inference, revenue shares who captures its 
 \begin{figure}[!htb]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig2_structure.pdf}
-\caption{Left, open-weight share of tokens by quarter in the archived leaderboards, with the
-daily panel shown separately because the two endpoints are not comparable in level. Right,
-share of platform tokens and of spending for the ten largest providers.}
+\caption{Left, open-weight share of tokens by quarter, computed from the archived
+leaderboards. Right, share of platform tokens and of spending for the ten largest providers by
+volume.}
 \label{fig:structure}
 \end{figure}
 
 The open-weight share of volume is also far from stable. In the archived leaderboards,
-which are internally consistent over time though not comparable in level with the daily
-panel, open-weight models held \OpenShareEarly\% of tokens in late 2023, fell to
+open-weight models held \OpenShareEarly\% of tokens in late 2023, fell to
 \OpenShareTrough\% by mid-2025, and recovered to \OpenShareLate\% by mid-2026. The trough
 coincides with the sample used by \citet{nagle2025}, whose finding that proprietary models
 dominate usage describes a market that has since moved.
@@ -402,6 +401,8 @@ revisions, net of anything common to the market on a date,
 \log y_{jt} = \beta \log p_{jt} + \alpha_j + \gamma_t + \varepsilon_{jt} .
 \label{eq:elasticity}
 \end{equation}
+Here $\alpha_j$ is a model effect, $\gamma_t$ a date effect and $\varepsilon_{jt}$ the
+residual.
 We estimate $\hat\beta$ = \ElastTok{} (s.e.\ \ElastTokSE) for tokens and \ElastReq{}
 (s.e.\ \ElastReqSE) for requests, with indistinguishable estimates for open-weight and
 proprietary models. Dropping the model fixed effects, so that cross-model variation
@@ -531,8 +532,10 @@ with mean utility
 \label{eq:delta}
 \end{equation}
 where $x_j$ collects the capability index, context length, modality, reasoning support,
-latency and age, and the outside option is the unscored fringe holding \CFoutside\% of tokens.
-Shares invert to mean utilities \citep{berry1994},
+latency and age, $\alpha$ the coefficients on them and $\xi_j$ the unobserved quality of model
+$j$. The outside option is the unscored fringe, whose share $s_0$ is \CFoutside\% of tokens,
+and $s_{j \mid g(j)}$ denotes model $j$'s share within its own nest. Shares invert to mean
+utilities \citep{berry1994},
 \begin{equation}
 \delta_j = \log s_j - \log s_0 - \sigma \log s_{j \mid g(j)} ,
 \label{eq:inversion}
@@ -577,7 +580,8 @@ raising the outside share from the observed \CFoutside\% to 50\% raises the prop
 from \CFcs\% to 47\% while lowering the dollar figure to \$1.0m per day. The price effect is invariant to both, because it is governed by
 the composition of the surviving choice set rather than by the strength of substitution.
 Concentration moves against the presumption that open weights fragment the market.
-$H^{\text{tok}}$ rises from \CFhhiBase{} to \CFhhiCf{}, because open-weight volume is
+the provider Herfindahl index on tokens rises from \CFhhiBase{} to \CFhhiCf{}, because
+open-weight volume is
 spread across more suppliers than the proprietary volume that replaces it.
 
 \begin{figure}[!htb]
