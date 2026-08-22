@@ -16,10 +16,14 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{xcolor}
+\usepackage{float}
 
 \captionsetup{font=small,labelfont=bf,skip=4pt}
 
 % pack floats more tightly
+\setcounter{topnumber}{1}
+\setcounter{bottomnumber}{0}
+\setcounter{totalnumber}{1}
 \renewcommand{\topfraction}{0.92}
 \renewcommand{\bottomfraction}{0.7}
 \renewcommand{\textfraction}{0.06}
@@ -266,7 +270,7 @@ API and consumer subscription products, and its users are developers who have ch
 router. That selects for price sensitivity and willingness to switch, so the segment we
 observe is the one in which open-weight substitution is easiest.
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{The estimation sample, measured on the last complete day of the daily panel. Prices
 are dollars per million tokens for the blended mix of \eqref{eq:price}. Capability is the
 index \eqref{eq:index}. Shares are within the estimation sample, which covers \CovScored\% of
@@ -327,7 +331,7 @@ spending, while Anthropic serves \AnthTok\% of tokens and collects \AnthSpend\%.
 index is \HHItok{} computed on tokens and \HHIspend{} computed on spending. By volume the market is moderately concentrated. By revenue it is concentrated. Volume
 shares describe who runs the world's inference, revenue shares who captures its value.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig2_structure.pdf}
 \caption{Left, open-weight share of tokens by quarter in the archived leaderboards, with the
@@ -406,7 +410,7 @@ higher-priced models carry unobserved quality. Figure~\ref{fig:elasticity} shows
 estimate survives every alternative we tried, holding between $-0.66$ and $-0.46$ across ten
 specifications and between $-0.58$ and $-0.51$ when models are dropped one at a time.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.66\textwidth]{../figures/fig4_elasticity.pdf}
 \caption{Own-price elasticity across specifications, with 95\% intervals clustered by
@@ -576,7 +580,7 @@ Concentration moves against the presumption that open weights fragment the marke
 $H^{\text{tok}}$ rises from \CFhhiBase{} to \CFhhiCf{}, because open-weight volume is
 spread across more suppliers than the proprietary volume that replaces it.
 
-\begin{figure}[b]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig7_counterfactual.pdf}
 \caption{Left, for each of the \Ntasks{} task markets, the price increase implied by
@@ -603,7 +607,7 @@ displace. Table~\ref{tab:tasks} groups the tasks into families. The effect track
 open-weight penetration closely, reaching 20\% in coding work and 7\% in data
 extraction and transformation.
 
-\begin{table}[t]
+\begin{table}[H]
 \caption{The open-weight counterfactual inside each family of task markets, weighted by each
 task's share of platform spending. Shares and changes are averages over the tasks in the
 family.}
@@ -1043,7 +1047,7 @@ Cosine      & similarity                         & $0.083$ & 0.086 & 11{,}820 \\
 \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig3_supply.pdf}
 \caption{Left: distribution of tokens across the number of independent hosting providers
@@ -1066,7 +1070,7 @@ entrant a tenth below the frontier but priced at \$0.05 takes 17\% and cuts prop
 volume by 18\%. At the frontier's own price, an open model that matches it takes
 essentially nothing.
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.52\textwidth]{../figures/fig8_frontier.pdf}
 \caption{Change in proprietary token share when one hypothetical open-weight model is
