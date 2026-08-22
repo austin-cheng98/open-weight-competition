@@ -13,16 +13,15 @@ choice set would cost users.
 src/collect/    downloads: live endpoints, model pages, Hugging Face, archive captures
 src/build/      panel construction from the raw downloads
 src/analysis/   capability vectors, demand estimation, event studies, counterfactuals
-src/plots/      figures
 data/           raw/ (downloaded, gitignored) and derived/ (analysis panels)
-results.json, robustness.json   every number the paper quotes
+results.json, robustness.json   the estimates and the robustness checks
 ```
 
 ## Running it
 
 ```
 pip install -r requirements.txt
-python run_all.py                 # build panels, estimate, draw figures
+python run_all.py                 # build the panels and estimate
 python run_all.py collect         # re-download everything first
 ```
 
@@ -30,7 +29,7 @@ Modules run as package entry points, so invoke them from the repository root:
 
 ```
 python -m src.analysis.results
-python -m src.plots.fig_market
+python -m src.analysis.robustness
 ```
 
 `collect` takes several hours because the Internet Archive endpoints are rate limited;
@@ -57,10 +56,13 @@ model pages embed; `src/collect/wayback.py` is the rate-limited archive client.
 | `src.collect` | `fetch_live`, `fetch_model_pages`, `fetch_endpoints`, `fetch_hf`, `fetch_price_history`, `fetch_usage_history` |
 | `src.build` | `build_models`, `build_speed`, `build_supply`, `build_tasks`, `build_panel`, `long_panel` |
 | `src.analysis` | `results`, `robustness` |
-| `src.plots` | `fig_market`, `fig_structure`, `fig_supply`, `fig_prices`, `fig_elasticity`, `fig_entry`, `fig_counterfactual`, `frontier_sim` |
 
 Estimation lives in `capability.py` (capability vectors, similarity, imputation),
 `demand.py` and `estimate.py` (share regressions and instrument diagnostics),
-`event_study.py` (release event studies), `supply.py` and `counterfactual.py`
-(nested-logit inversion and the counterfactual choice set), and
-`task_counterfactual.py` (the same exercise inside each task market).
+`event_study.py` (release event studies), `price_dynamics.py` (price survival and the
+response of volume to a revision), `supply.py` and `counterfactual.py` (nested-logit
+inversion and the counterfactual choice set), `task_counterfactual.py` (the same exercise
+inside each task market), and `frontier.py` (the hypothetical entrant).
+
+`results.json` holds every estimate the analysis produces; `robustness.json` holds the
+alternative specifications.

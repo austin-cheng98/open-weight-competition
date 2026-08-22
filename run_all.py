@@ -7,10 +7,7 @@ COLLECT = ["fetch_live", "fetch_model_pages", "fetch_endpoints", "fetch_hf",
 BUILD = ["build_models", "build_speed", "build_supply", "build_tasks",
          "build_panel", "long_panel"]
 ANALYSE = ["results", "robustness"]
-FIGURES = ["fig_market", "fig_structure", "fig_supply", "fig_prices",
-           "fig_elasticity", "fig_entry", "fig_counterfactual", "frontier_sim"]
-
-PACKAGE = {"collect": COLLECT, "build": BUILD, "analysis": ANALYSE, "plots": FIGURES}
+PACKAGE = {"collect": COLLECT, "build": BUILD, "analysis": ANALYSE}
 
 
 def run(stage, modules):
@@ -21,7 +18,7 @@ def run(stage, modules):
 
 
 if __name__ == "__main__":
-    stages = sys.argv[1:] or ["build", "analysis", "plots"]
-    for stage in ("collect", "build", "analysis", "plots"):
+    stages = sys.argv[1:] or ["build", "analysis"]
+    for stage in ("collect", "build", "analysis"):
         if stage in stages:
             run(stage, PACKAGE[stage])   # collect takes hours: the archive is rate limited

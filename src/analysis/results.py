@@ -78,10 +78,10 @@ def stickiness(R):
     R["price_change_median"] = float(sub.loc[ch, "dlp"].median())
     R["n_price_changes"] = int(ch.sum())
     R["n_price_transitions"] = int(sub.dlp.notna().sum())
-    from src.plots import fig_prices
-    surv = fig_prices.survival(pp)
+    from src.analysis import price_dynamics as pd_
+    surv = pd_.survival(pp)
     grid = np.arange(0, 391, 30)
-    km = fig_prices.km(surv, grid)
+    km = pd_.km(surv, grid)
     R["price_survival_180"] = float(km[grid == 180][0])
     R["price_survival_360"] = float(km[grid == 360][0])
     # monthly frequency of a price change, the comparable statistic in the
@@ -122,8 +122,8 @@ def elasticity(R):
         b, se = cluster_ols(yv, Xv, sub.permaslug.factorize()[0])
         R[f"within_elasticity_{tag}"] = float(b[0])
         R[f"within_elasticity_{tag}_se"] = float(se[0])
-    from src.plots import fig_prices
-    es, n_ev = fig_prices.event_study(d)
+    from src.analysis import price_dynamics as pd_
+    es, n_ev = pd_.event_study(d)
     R["n_price_events"] = int(n_ev)
     R["price_event_pre"] = float(es.loc[es.k.between(-3, -2), "beta"].mean())
     R["price_event_post"] = float(es.loc[es.k >= 3, "beta"].mean())
@@ -330,6 +330,20 @@ def instruments(R):
     return R
 
 
+def frontier(R):
+    """What a hypothetical open-weight entrant would have to look like to matter."""
+    from src.analysis import counterfactual as cfm
+    from src.analysis import frontier as fr
+    d = cfm.cross_section()
+    price = float(d.loc[d.q_index.idxmax(), "p_blend"])
+    R["frontier_price"] = price
+    R["entrant_grid"] = {
+        f"rho={rho:.2f},p={p:.2f}": fr.simulate(d, rho, p)
+        for rho in (0.0, 0.05, 0.10, 0.20)
+        for p in (0.05, 0.5, price)}
+    return R
+
+
 def task_counterfactual(R):
     from src.analysis import task_counterfactual as tc
     d = tc.run(tc.load(), BETA, SIGMA)
@@ -350,7 +364,7 @@ def main():
     R = {}
     for step in (coverage, stickiness, elasticity, growth, diversion, structure,
                  frontier, tasks, open_share_history, long_horizon,
-                 instruments, task_counterfactual):
+                 instruments, frontier, task_counterfactual):
         R = step(R)
         print(f"  {step.__name__} done")
     OUT.write_text(json.dumps(R, indent=1, default=float))
