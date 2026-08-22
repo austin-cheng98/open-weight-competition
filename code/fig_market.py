@@ -53,7 +53,7 @@ def main():
     ax.legend(loc="upper left", handletextpad=0.4, borderpad=0.2,
               labelspacing=0.25)
     for name, dx, dy, ha in (("Claude Opus 5", -8, 2.1, "center"),
-                             ("DeepSeek V4 Flash 0731", -5.5, 0.21, "center")):
+                             ("DeepSeek V4 Flash 0731", 0.5, 0.19, "center")):
         m = xs[xs.name.str.contains(name.split(" 0")[0], regex=False)]
         if len(m):
             m = m.iloc[0]
