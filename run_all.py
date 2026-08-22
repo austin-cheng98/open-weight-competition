@@ -10,7 +10,8 @@ COLLECT = ["fetch_live.py", "fetch_model_pages.py", "fetch_endpoints.py",
 BUILD = ["build_models.py", "build_speed.py", "build_supply.py", "build_tasks.py",
          "build_panel.py", "long_panel.py"]
 ANALYSE = ["results.py", "robustness.py"]
-FIGURES = ["fig_market.py", "fig_prices.py", "fig_entry.py", "fig_counterfactual.py"]
+FIGURES = ["fig_market.py", "fig_prices.py", "fig_entry.py",
+           "fig_counterfactual.py", "frontier_sim.py"]
 
 
 def run(stage, scripts):

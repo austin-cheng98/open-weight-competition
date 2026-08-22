@@ -852,6 +852,35 @@ $\sigma$ & Price paid & Price without open & Surplus change & Surplus loss & HHI
 \end{tabular}
 \end{table}
 
+\section{How good and how cheap an open model has to be}
+
+The counterfactual removes the open-weight models that exist. The opposite exercise
+asks what a new one would have to look like to matter. We insert a single hypothetical
+open-weight entrant with capability $(1-\rho)$ times the frontier and price $p$,
+assigning it the mean utility implied by the fitted gradient of $\delta_j$ in capability
+and log price, and recompute shares.
+
+Figure~\ref{fig:frontier} traces the effect on proprietary volume. The iso-effect lines
+are steep, which is the substantive point: price moves the outcome far more than the
+last few points of capability. An entrant that matches the frontier exactly but is
+priced at \$0.50 per million tokens takes 6.6\% of platform tokens and cuts proprietary
+volume by 7\%. An entrant a tenth below the frontier but priced at \$0.05 takes 17\% and
+cuts proprietary volume by 18\%. At the frontier's own price, an open model that matches
+it takes essentially nothing. Closing the last of the capability gap is worth much less
+to the proprietary side than the pricing that open-weight release makes possible, which
+is consistent with the pattern in Figure~\ref{fig:market}: the open frontier lags by
+about a quarter, but sells the capability it does reach at a fraction of the price.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.62\textwidth]{../figures/fig5_frontier.pdf}
+\caption{\textbf{The entrant a proprietary provider should fear.} Change in proprietary
+token share when one hypothetical open-weight model is added to the choice set, by its
+price and its capability shortfall against the frontier, at $\beta_p=-1$ and
+$\sigma=0.4$. Contours mark 2, 5 and 10 percent losses.}
+\label{fig:frontier}
+\end{figure}
+
 \newpage
 \input{checklist}
 
