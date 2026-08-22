@@ -284,53 +284,32 @@ the ninety percent difference reported for 2025 data \citep{demirer2025,nagle202
 would expect if proprietary providers have since released cheaper tiers, and comparing only
 the cheapest option at each capability level narrows the gap to \PriceRatio{} times.
 
-The right panel tracks the best capability obtainable from each side over time. Writing
-$\mathcal{O}_t$ and $\mathcal{C}_t$ for the sets of open-weight and proprietary models
-released by $t$, the open-weight lag is
-\begin{equation}
-\ell_t = t - \min \Big\{ \tau : \max_{k \in \mathcal{C}_\tau} Q_k \;\geq\;
-\max_{k \in \mathcal{O}_t} Q_k \Big\} ,
-\label{eq:lag}
-\end{equation}
-whose median over the sample is \LagDays{} days. The gap is a lag rather than a level. At the
-very top of the capability distribution proprietary models are unmatched at every date, but
-the set of tasks for which that matters shrinks as the open frontier advances.
-
-\begin{figure}[!tb]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig1_price_capability.pdf}
 \caption{Left, posted blended price against the capability index, marker area proportional
 to the square root of token volume, step functions giving the cheapest price available at or
 above each capability level. Right, the best capability available from each side by release
-date, shading the lag \eqref{eq:lag}.}
+date, shading the open-weight lag.}
 \label{fig:market}
 \end{figure}
+
+The right panel tracks the best capability obtainable from each side over time. The
+open-weight frontier reaches a given capability level a median of \LagDays{} days after the
+proprietary frontier first reaches it. The gap is a lag rather than a level. At the very top
+of the capability distribution proprietary models are unmatched at every date, but the set of
+tasks for which that matters shrinks as the open frontier advances.
 
 \subsection{Volume shares and revenue shares}
 
 Open-weight models account for \OpenTok\% of tokens but only \OpenSpend\% of spending, and
 the wedge is visible provider by provider. Figure~\ref{fig:structure} shows the two
 distributions side by side. DeepSeek serves \DsTok\% of tokens and collects \DsSpend\% of
-spending, while Anthropic serves \AnthTok\% of tokens and collects \AnthSpend\%. Aggregating
-into a Herfindahl index over providers $f$,
-\begin{equation}
-H^{\text{tok}} = 10^4 \sum_f \Big( \frac{\sum_{j \in f} y_j}{\sum_k y_k} \Big)^2
-= \HHItok , \qquad
-H^{\text{spend}} = 10^4 \sum_f \Big( \frac{\sum_{j \in f} e_j}{\sum_k e_k} \Big)^2
-= \HHIspend .
-\label{eq:hhi}
-\end{equation}
-By volume the market is moderately concentrated. By revenue it is concentrated. Volume
+spending, while Anthropic serves \AnthTok\% of tokens and collects \AnthSpend\%. The provider Herfindahl
+index is \HHItok{} computed on tokens and \HHIspend{} computed on spending. By volume the market is moderately concentrated. By revenue it is concentrated. Volume
 shares describe who runs the world's inference, revenue shares who captures its value.
 
-The open-weight share of volume is also far from stable. In the archived leaderboards,
-which are internally consistent over time though not comparable in level with the daily
-panel, open-weight models held \OpenShareEarly\% of tokens in late 2023, fell to
-\OpenShareTrough\% by mid-2025, and recovered to \OpenShareLate\% by mid-2026. The trough
-coincides with the sample used by \citet{nagle2025}, whose finding that proprietary models
-dominate usage describes a market that has since moved.
-
-\begin{figure}[!tb]
+\begin{figure}[b]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig2_structure.pdf}
 \caption{Left, open-weight share of tokens by quarter in the archived leaderboards, with the
@@ -338,6 +317,13 @@ daily panel shown separately because the two endpoints are not comparable in lev
 share of platform tokens and of spending for the ten largest providers.}
 \label{fig:structure}
 \end{figure}
+
+The open-weight share of volume is also far from stable. In the archived leaderboards,
+which are internally consistent over time though not comparable in level with the daily
+panel, open-weight models held \OpenShareEarly\% of tokens in late 2023, fell to
+\OpenShareTrough\% by mid-2025, and recovered to \OpenShareLate\% by mid-2026. The trough
+coincides with the sample used by \citet{nagle2025}, whose finding that proprietary models
+dominate usage describes a market that has since moved.
 
 \subsection{Supply of open weights}
 
@@ -361,6 +347,15 @@ never change price at all. The left panel of Figure~\ref{fig:prices} shows the s
 the launch price. \SurvSix\% of models are still at their launch price after six months and
 \SurvTwelve\% after a year. Conditional on a change the median revision is a cut of about
 \MedianCut{} log points, and \CutShare\% of changes are cuts.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig5_prices.pdf}
+\caption{Left, Kaplan-Meier survival of a model's launch price. Right, coefficients
+$\beta_\tau$ from \eqref{eq:pricedynamics} around \NPriceEvents{} revisions, 95\%
+intervals clustered by model.}
+\label{fig:prices}
+\end{figure}
 
 Expressed the way the price-setting literature does, \MonthlyFreq\% of model-months
 contain a price change, an expected duration of about \PriceDuration{} months. That is at
@@ -390,8 +385,18 @@ We estimate $\hat\beta$ = \ElastTok{} (s.e.\ \ElastTokSE) for tokens and \ElastR
 (s.e.\ \ElastReqSE) for requests, with indistinguishable estimates for open-weight and
 proprietary models. Dropping the model fixed effects, so that cross-model variation
 identifies $\beta$, moves the estimate to \ElastCross{}, which is what one would expect if
-higher-priced models carry unobserved quality. Table~\ref{tab:robust} in the appendix
-reports both splits and eight further specifications.
+higher-priced models carry unobserved quality. Figure~\ref{fig:elasticity} shows that the
+estimate survives every alternative we tried, holding between $-0.66$ and $-0.46$ across ten
+specifications and between $-0.58$ and $-0.51$ when models are dropped one at a time.
+
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.66\textwidth]{../figures/fig4_elasticity.pdf}
+\caption{Own-price elasticity across specifications, with 95\% intervals clustered by
+model. Shading marks the range spanned by dropping each of the 268 models whose price ever
+moves, one at a time.}
+\label{fig:elasticity}
+\end{figure}
 
 The right panel of Figure~\ref{fig:prices} traces the dynamics around \NPriceEvents{}
 revisions, restricted to the captures that report non-overlapping weekly buckets so that
@@ -419,15 +424,6 @@ rather than days. That also rationalises the rigidity. A provider that would gai
 volume from a price cut, and lose little from holding steady, has weak incentive to reprice a
 model already in the field.
 
-\begin{figure}[!tb]
-\centering
-\includegraphics[width=\textwidth]{../figures/fig4_prices.pdf}
-\caption{Left, Kaplan-Meier survival of a model's launch price. Right, coefficients
-$\beta_\tau$ from \eqref{eq:pricedynamics} around \NPriceEvents{} revisions, 95\%
-intervals clustered by model.}
-\label{fig:prices}
-\end{figure}
-
 \section{Model entry}
 \label{sec:entry}
 
@@ -439,14 +435,18 @@ window containing \NEvents{} releases by providers with priced, scored models, o
 panel of Figure~\ref{fig:entry} decomposes daily volume into incumbents and models released
 during the window. Entrants reached \EntrantShare\% of platform tokens within four weeks,
 \EntrantOpen\% of it open-weight. Incumbent volume did not fall. It grew
-\IncumbentGrowth\%. Writing $\mathcal{E}$ for the entrants and $T_0$, $T_1$ for the
-endpoints of the window, entry accounts for
-\begin{equation}
-\frac{\sum_{j \in \mathcal{E}} y_{j T_1}}{\sum_j y_{j T_1} - \sum_j y_{j T_0}}
-= \EntryGrowthShare\%
-\label{eq:decomp}
-\end{equation}
-of net growth, and the residual is incumbent expansion.
+\IncumbentGrowth\%. Models released during the window account for
+\EntryGrowthShare\% of net growth over it, and incumbent expansion for the rest.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig6_entry.pdf}
+\caption{Left, daily platform volume split between models already serving traffic at the
+start of the window and models released during it. Right, event-time coefficients from
+\eqref{eq:diversion} per unit of exposure \eqref{eq:threat}, 95\% intervals clustered by
+incumbent.}
+\label{fig:entry}
+\end{figure}
 
 \subsection{Incumbent responses to entry}
 
@@ -489,16 +489,6 @@ points against a median market change of $+\MktGrowthLong{}$. DeepSeek R1
 the sixteen weeks around it while incumbent volume held flat at $-0.03$. Incumbents lose
 share because the market grows around them, but they do not lose volume.
 
-\begin{figure}[!tb]
-\centering
-\includegraphics[width=\textwidth]{../figures/fig5_entry.pdf}
-\caption{Left, daily platform volume split between models already serving traffic at the
-start of the window and models released during it. Right, event-time coefficients from
-\eqref{eq:diversion} per unit of exposure \eqref{eq:threat}, 95\% intervals clustered by
-incumbent.}
-\label{fig:entry}
-\end{figure}
-
 \section{Demand system and counterfactuals}
 
 \subsection{Specification}
@@ -529,18 +519,7 @@ tokens. Observed shares invert to mean utilities \citep{berry1994},
 \label{eq:inversion}
 \end{equation}
 so the system reproduces the data exactly and the counterfactual does not turn on how well
-the characteristics fit. Elasticities follow from \eqref{eq:shares},
-\begin{equation}
-\frac{\partial \log s_j}{\partial \log p_k} =
-\begin{cases}
-\beta_p \Big[ \dfrac{1}{1-\sigma}
-- \dfrac{\sigma}{1-\sigma} s_{j \mid g(j)} - s_j \Big], & k = j, \\[2ex]
-\beta_p \Big[ \dfrac{\sigma}{1-\sigma} s_{k \mid g(k)}
-\mathbf{1}\{g(k) = g(j)\} + s_k \Big], & k \neq j,
-\end{cases}
-\label{eq:elast}
-\end{equation}
-and consumer surplus from the expected maximum utility \citep{small1981,mcfadden1974},
+the characteristics fit. Consumer surplus follows from the expected maximum utility \citep{small1981,mcfadden1974},
 \begin{equation}
 \mathrm{CS} = \frac{1}{|\beta_p|} \log \Big( 1 + \sum_h D_h^{\,1-\sigma} \Big) .
 \label{eq:cs}
@@ -587,6 +566,16 @@ Concentration moves against the presumption that open weights fragment the marke
 $H^{\text{tok}}$ rises from \CFhhiBase{} to \CFhhiCf{}, because open-weight volume is
 spread across more suppliers than the proprietary volume that replaces it.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig7_counterfactual.pdf}
+\caption{Left, for each of the \Ntasks{} task markets, the price increase implied by
+removing open-weight models against their share of task spending, marker area proportional to
+the task's share of platform spending. Right, aggregate surplus loss per day across
+$\sigma$ and $\beta_p$.}
+\label{fig:cf}
+\end{figure}
+
 These numbers hold prices fixed, which given the rigidity of Section~4.1 makes the exercise
 a statement about variety in the tradition of \citet{trajtenberg1989}, \citet{hausman1996}
 and \citet{petrin2002}. Allowing providers to reprice would add to the loss, so the estimates
@@ -601,16 +590,6 @@ hold about a third of spending, and the smallest in data extraction and transfor
 they hold under a sixth. These are smaller than the aggregate because task shares are
 measured on spending, which weights the expensive proprietary models that open weights do not
 displace.
-
-\begin{figure}[!tb]
-\centering
-\includegraphics[width=\textwidth]{../figures/fig6_counterfactual.pdf}
-\caption{Left, for each of the \Ntasks{} task markets, the price increase implied by
-removing open-weight models against their share of task spending, marker area proportional to
-the task's share of platform spending. Right, aggregate surplus loss per day across
-$\sigma$ and $\beta_p$.}
-\label{fig:cf}
-\end{figure}
 
 \section{Interpretation}
 
@@ -1088,7 +1067,7 @@ essentially nothing.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.52\textwidth]{../figures/fig7_frontier.pdf}
+\includegraphics[width=0.52\textwidth]{../figures/fig8_frontier.pdf}
 \caption{Change in proprietary token share when one hypothetical open-weight model is
 added to the choice set, by its price and its capability shortfall against the frontier, at
 $\beta_p = -1$ and $\sigma = 0.4$. Contours mark 2, 5 and 10 percent losses.}

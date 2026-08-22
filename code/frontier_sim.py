@@ -65,7 +65,7 @@ def main():
     cb.set_label("Change in proprietary token share (%)", fontsize=7)
     cb.ax.tick_params(labelsize=6.5)
     fig.tight_layout()
-    style.save(fig, FIG / "fig7_frontier.pdf")
+    style.save(fig, FIG / "fig8_frontier.pdf")
 
     for rho in (0.0, 0.05, 0.10, 0.20):
         row = [simulate(d, rho, p) for p in (0.05, 0.5, frontier_p)]

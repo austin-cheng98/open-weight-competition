@@ -74,7 +74,7 @@ def main():
     volume_panel(axes[0])
     r, ev = diversion_panel(axes[1])
     fig.tight_layout(w_pad=1.6)
-    style.save(fig, FIG / "fig5_entry.pdf")
+    style.save(fig, FIG / "fig6_entry.pdf")
     post = r[r.tau >= 0]
     print(f"{len(ev)} events; mean post-release coefficient "
           f"{post.beta.mean():.3f}, mean 95% half-width {1.96 * post.se.mean():.3f}")

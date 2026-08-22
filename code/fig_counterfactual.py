@@ -59,7 +59,7 @@ def main():
     ax2.set_ylim(bottom=0)
     ax2.legend(loc="upper right", handlelength=1.2, handletextpad=0.5, labelspacing=0.25)
     fig.tight_layout(w_pad=1.5)
-    style.save(fig, FIG / "fig6_counterfactual.pdf")
+    style.save(fig, FIG / "fig7_counterfactual.pdf")
     print(f"aggregate: price +{dp[8]:.0f}% and surplus {dcs[8]:.0f}% at sigma=0.40")
     print(f"task level: price +{100 * np.average(tk.d_price, weights=tk.weight):.1f}%, "
           f"surplus {100 * np.average(tk.d_cs, weights=tk.weight):.1f}%")

@@ -100,7 +100,7 @@ def main():
         ax2.set_xlabel("Observations since the price change")
         ax2.set_ylabel("Response of log volume")
     fig.tight_layout(w_pad=1.6)
-    style.save(fig, FIG / "fig4_prices.pdf")
+    style.save(fig, FIG / "fig5_prices.pdf")
     print(f"price-change events used: {n_ev}")
     if len(es):
         print(es.round(3).to_string(index=False))
