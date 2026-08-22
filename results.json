@@ -39,6 +39,8 @@
  "n_price_transitions": 34150,
  "price_survival_180": 0.5559211087418847,
  "price_survival_360": 0.452171411581882,
+ "monthly_change_freq": 0.1257076257076257,
+ "price_duration_months": 7.443775217074887,
  "long_panel_obs": 19803,
  "long_panel_models": 634,
  "long_panel_start": "2023-11-27",

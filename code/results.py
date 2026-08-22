@@ -84,6 +84,16 @@ def stickiness(R):
     km = fig_prices.km(surv, grid)
     R["price_survival_180"] = float(km[grid == 180][0])
     R["price_survival_360"] = float(km[grid == 360][0])
+    # monthly frequency of a price change, the comparable statistic in the
+    # price-setting literature
+    pp2 = pp.copy()
+    pp2["month"] = pp2.snapshot.dt.to_period("M")
+    pp2["chg"] = pp2.groupby("permaslug").p_in.transform(
+        lambda x: np.log(x).diff().abs() > 1e-6)
+    mm = pp2.groupby(["permaslug", "month"]).agg(any_chg=("chg", "max"), n=("chg", "size"))
+    mm = mm[mm.n >= 2]
+    R["monthly_change_freq"] = float(mm.any_chg.mean())
+    R["price_duration_months"] = float(-1 / np.log(1 - mm.any_chg.mean()))
     return R
 
 
