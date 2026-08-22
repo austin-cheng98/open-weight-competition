@@ -94,6 +94,9 @@ def elasticity(R):
     R["long_panel_models"] = int(d.permaslug.nunique())
     R["long_panel_start"] = str(d.date.min().date())
     R["long_panel_end"] = str(d.date.max().date())
+    chg = d.sort_values(["permaslug", "date"]).groupby("permaslug").ln_p.transform(
+        lambda x: x.diff().abs() > 1e-6)
+    R["n_revisions_panel"] = int(chg.sum())
     for lab, y in (("tokens", "ln_tokens"), ("requests", "ln_req")):
         yv, Xv = absorb(d, y, ["ln_p"], ["permaslug", "day"])
         b, se = cluster_ols(yv, Xv, d.permaslug.factorize()[0])

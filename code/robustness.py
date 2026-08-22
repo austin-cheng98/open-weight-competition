@@ -98,6 +98,27 @@ def displacement_long():
     return pd.DataFrame(rows)
 
 
+def outside_option():
+    """The size of the outside option is a modelling choice; this varies it."""
+    import counterfactual as cfm
+    import demand
+    df = demand.build_sample()
+    d = cfm.cross_section(df)
+    tokens = df[df.date == d.date.iloc[0]].tokens.sum()
+    rows = []
+    for s0 in (float(d.share_out.iloc[0]), 0.10, 0.25, 0.50):
+        dd = d.copy()
+        dd["share"] = dd.share * (1 - s0) / dd.share.sum()
+        dd["share_out"] = s0
+        for sg in (0.0, 0.4, 0.7):
+            base, cf, _ = cfm.run(dd, -1.0, sg)
+            rows.append(dict(outside_share=s0, sigma=sg,
+                             d_price=cf["price_paid"] / base["price_paid"] - 1,
+                             d_cs=cf["cs"] / base["cs"] - 1,
+                             loss_m_per_day=(base["cs"] - cf["cs"]) * tokens / 1e12))
+    return pd.DataFrame(rows)
+
+
 def diversion_variants():
     u, xs, scored = es.load()
     d, Z = cap.capability_matrix(scored)
@@ -130,13 +151,16 @@ def main():
     sc, share = successor_check()
     print(f"\nSuccessor releases (share of observations {share:.3f})\n"
           + sc.round(3).to_string(index=False))
+    oo = outside_option()
+    print("\nOutside-option sensitivity\n" + oo.round(3).to_string(index=False))
     dl = displacement_long()
     print("\nIncumbent volume around major open-weight releases\n"
           + dl.round(3).to_string(index=False))
     (ROOT / "robustness.json").write_text(json.dumps(
         {"elasticity": e.to_dict("records"), "diversion": v.to_dict("records"),
          "successor": sc.to_dict("records"), "successor_share": share,
-         "displacement_long": dl.to_dict("records")}, indent=1, default=float))
+         "displacement_long": dl.to_dict("records"),
+         "outside_option": oo.to_dict("records")}, indent=1, default=float))
 
 
 if __name__ == "__main__":

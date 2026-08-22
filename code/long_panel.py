@@ -54,8 +54,3 @@ if __name__ == "__main__":
     print(f"within-model sd of log price: median {within.median():.3f}, "
           f"share with any variation {(within > 1e-6).mean():.2f}")
     d.to_csv(DER / "panel_long.csv", index=False)
-    import json
-    stats = json.loads((DER.parent.parent / "results.json").read_text()) \
-        if (DER.parent.parent / "results.json").exists() else {}
-    stats["n_revisions_panel"] = int(chg.sum())
-    (DER.parent.parent / "results.json").write_text(json.dumps(stats, indent=1))

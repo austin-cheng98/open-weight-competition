@@ -35,22 +35,22 @@
 \newcommand{\PriceRatio}{1.4}
 \newcommand{\HostsOpen}{14.9}
 \newcommand{\HostsClosed}{3.0}
-\newcommand{\ChangeRate}{3.4}
-\newcommand{\NeverRepriced}{56}
-\newcommand{\CutShare}{60}
-\newcommand{\SurvSix}{55}
-\newcommand{\SurvTwelve}{43}
-\newcommand{\PanelObs}{18{,}649}
-\newcommand{\PanelModels}{587}
+\newcommand{\ChangeRate}{2.9}
+\newcommand{\NeverRepriced}{54}
+\newcommand{\CutShare}{58}
+\newcommand{\SurvSix}{56}
+\newcommand{\SurvTwelve}{45}
+\newcommand{\PanelObs}{19{,}803}
+\newcommand{\PanelModels}{634}
 \newcommand{\PanelStart}{November 2023}
-\newcommand{\PanelEnd}{March 2026}
-\newcommand{\NRevisions}{659}
+\newcommand{\PanelEnd}{May 2026}
+\newcommand{\NRevisions}{708}
 \newcommand{\NPriceEvents}{306}
-\newcommand{\ElastTok}{$-0.51$}
-\newcommand{\ElastTokSE}{0.11}
-\newcommand{\ElastReq}{$-0.44$}
-\newcommand{\ElastReqSE}{0.10}
-\newcommand{\ElastCross}{$-0.23$}
+\newcommand{\ElastTok}{$-0.53$}
+\newcommand{\ElastTokSE}{0.10}
+\newcommand{\ElastReq}{$-0.46$}
+\newcommand{\ElastReqSE}{0.09}
+\newcommand{\ElastCross}{$-0.24$}
 \newcommand{\NEvents}{10}
 \newcommand{\NEventsOpen}{5}
 \newcommand{\MarketGrowth}{65}
@@ -335,7 +335,7 @@ models give indistinguishable estimates. Dropping the model fixed effects, so th
 cross-model variation identifies $\beta$, moves the estimate to \ElastCross{}, which
 is what one would expect if higher-priced models carry unobserved quality.
 
-The right panel of Figure~\ref{fig:prices} traces the dynamics around \NRevisions{}
+The right panel of Figure~\ref{fig:prices} traces the dynamics around \NPriceEvents{}
 revisions, restricted to the captures that report non-overlapping weekly buckets so
 that the path is not an artefact of a trailing aggregation window. Volume is flat
 before the change and settles about 0.3 to 0.45 log points lower per log point of
@@ -375,11 +375,11 @@ and date fixed effects and 95\% intervals clustered by model.}
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-6}
 & Tokens & Requests & Open & Proprietary & Tokens \\
 \midrule
-$\log$ price & $-0.510$ & $-0.438$ & $-0.554$ & $-0.517$ & $-0.230$ \\
-             & $(0.105)$ & $(0.089)$ & $(0.119)$ & $(0.208)$ & $(0.080)$ \\
+$\log$ price & $-0.534$ & $-0.463$ & $-0.582$ & $-0.534$ & $-0.239$ \\
+             & $(0.102)$ & $(0.087)$ & $(0.116)$ & $(0.204)$ & $(0.077)$ \\
 \midrule
-Observations & 18{,}649 & 18{,}649 & 8{,}345 & 10{,}304 & 18{,}649 \\
-Models       & 587 & 587 & 299 & 291 & 587 \\
+Observations & 19{,}803 & 19{,}803 & 8{,}873 & 10{,}930 & 19{,}803 \\
+Models       & 634 & 634 & 321 & 316 & 634 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -410,7 +410,7 @@ where $\delta_{jk}$ is an incumbent-by-entrant effect and $\lambda_{kt}$ an
 entrant-by-day effect, so that $\beta$ compares incumbents exposed to the same release
 on the same day. The exposure measure $\tau_{jk} = S_{jk} \, r_{jk}$ combines
 technological proximity with the entrant's relative value for money: $S_{jk} =
-\exp(-\lambda d_{jk})$ with $d_{jk}$ the Mahalanobis distance between capability
+\exp(-\kappa d_{jk})$ with $d_{jk}$ the Mahalanobis distance between capability
 vectors, and $r_{jk} = \log(q_k/p_k) - \log(q_j/p_j)$. Because capability and price
 both trend, we also control for post-release interactions with the incumbent's own
 capability and price.
@@ -502,7 +502,11 @@ current volume. The percentage change in surplus does not depend on $\beta_p$, w
 enters the baseline and the counterfactual identically; only the conversion into
 dollars scales with it. The loss is larger when substitution within a capability tier
 is weaker, ranging from \$3.9m to \$1.3m per day as $\sigma$ moves from 0 to 0.7
-(Figure~\ref{fig:cf} and Table~\ref{tab:cfgrid}). The price effect is almost invariant
+(Figure~\ref{fig:cf} and Table~\ref{tab:cfgrid}). It also depends on how large the
+outside option is taken to be, which is a modelling choice rather than a measurement:
+raising the outside share from the observed 2.4\% to 50\% raises the proportional
+surplus loss, from 21\% to 47\%, while lowering the dollar figure to \$1.0m per day.
+The price effect is invariant to both. The price effect is almost invariant
 to $\sigma$, because it is governed by the composition of the surviving choice set
 rather than by the strength of substitution. Concentration moves against the
 presumption that open weights fragment the market: the provider Herfindahl index rises
@@ -548,6 +552,36 @@ volume without taking it from anyone. In that environment, the standard empirica
 signature of competitive discipline, a price response by incumbents, is absent even
 though the constraint is economically large. Our counterfactual puts the value of the
 open-weight choice set at roughly one fifth of consumer surplus on this platform.
+
+\paragraph{A simple account.} The three fit together through the share of demand that
+is actually in play. Let $M_t$ be total demand, growing at rate $g$ per period, and let
+a fraction $\phi$ of existing demand be revisited each period, whether because a
+workload is rebuilt or because a team re-evaluates its choice. Contestable demand is
+$(g + \phi) M_t$, and a model's volume evolves as
+\begin{equation}
+y_{j,t+1} = (1 - \phi)\, y_{jt} + \sigma_j \,(g + \phi)\, M_t ,
+\label{eq:accounting}
+\end{equation}
+where $\sigma_j$ is its share of contestable demand. Three implications follow.
+An incumbent loses volume only when $\sigma_j (g+\phi) M_t < \phi\, y_{jt}$, that
+is, when its share of contestable demand falls below $\phi/(g+\phi)$ times its
+share of the stock; with $g \approx 0.13$ per week in our window, an incumbent with an
+average share of new demand keeps growing. An entrant reaches a share of about
+$\sigma_k (g+\phi)/(1+g)$ after one period, so entrants can take a large share of
+volume quickly without anyone shrinking. And a permanent price change reaches only the
+contestable margin, so the response measured $\tau$ periods out is attenuated by
+roughly $1 - (1-\phi-g)^{\tau}$ relative to its long-run value.
+
+That last point bounds how much of the inelasticity is an artefact of slow adjustment.
+Taking $\phi + g \approx 0.23$ per week and the six weekly observations over which
+Figure~\ref{fig:prices} shows the response settling, the attenuation factor is about
+0.8, so the long-run elasticity implied by our estimate is near $-0.6$. Demand for a
+given model is inelastic even after adjustment. The static first-order condition of a
+provider maximising current profit is therefore not satisfied at the posted price,
+which leaves two readings: providers price against a margin we do not observe, such as
+capacity, hardware amortisation or the option value of usage; or the posted price is
+not chosen to maximise current profit at all. The rigidity in Section~3.2 favours the
+second.
 
 This also reconciles two readings of the existing evidence. \citet{nagle2025} find
 that a great deal of proprietary usage sits on models dominated by an open
@@ -698,7 +732,7 @@ ridge regression on the dimensions the model does have, using models scored on b
 and predict the missing value. Masking half of the fully scored models and predicting
 the held-out values gives $R^2$ of 0.99, 0.97 and 0.96 for the reasoning, coding and
 agentic dimensions, with mean absolute errors of 1.7, 5.0 and 3.1 points against
-standard deviations of 16.5, 22.6 and 18.5. Imputation raises coverage from 109 models
+standard deviations of 16.4, 22.6 and 18.5. Imputation raises coverage from 109 models
 and 77\% of tokens to \Nscored{} models and \CovScored\% of tokens. All results in the
 main text hold on the directly scored subsample.
 
@@ -714,8 +748,8 @@ same time; the fixed-weight index removes that channel and is our preferred meas
 Two further checks bear on the elasticity. A price cut may accompany the launch of a
 replacement by the same provider, which would depress the old model's volume for
 reasons other than price. Adding an indicator for observations within 28 days of a
-same-provider release, which covers 36\% of the panel, leaves the estimate at
-$-0.509$; dropping those observations gives $-0.495$ (s.e.\ 0.125).
+same-provider release, which covers 38\% of the panel, leaves the estimate at
+$-0.534$; dropping those observations gives $-0.499$ (s.e.\ 0.123).
 
 Table~\ref{tab:divrobust} reports the diversion test under three definitions of
 technological distance. None of the six estimates is distinguishable from zero. The
@@ -734,16 +768,16 @@ model.}
 \toprule
 Specification & Estimate & Std.\ error & Observations & Models \\
 \midrule
-Fixed-weight price (baseline) & $-0.510$ & 0.105 & 18{,}649 & 587 \\
-Input price                   & $-0.501$ & 0.099 & 18{,}649 & 587 \\
-Output price                  & $-0.466$ & 0.113 & 18{,}649 & 587 \\
-Realised blended price        & $-0.627$ & 0.098 & 18{,}649 & 587 \\
-Requests rather than tokens   & $-0.438$ & 0.089 & 18{,}649 & 587 \\
+Fixed-weight price (baseline) & $-0.534$ & 0.102 & 19{,}803 & 634 \\
+Input price                   & $-0.526$ & 0.096 & 19{,}803 & 634 \\
+Output price                  & $-0.485$ & 0.109 & 19{,}803 & 634 \\
+Realised blended price        & $-0.658$ & 0.095 & 19{,}803 & 634 \\
+Requests rather than tokens   & $-0.463$ & 0.087 & 19{,}803 & 634 \\
 Weekly captures only          & $-0.472$ & 0.123 & 15{,}133 & 432 \\
-Trailing captures only        & $-0.384$ & 0.144 & 3{,}516  & 375 \\
-Open-weight models            & $-0.554$ & 0.119 & 8{,}345  & 299 \\
-Proprietary models            & $-0.517$ & 0.208 & 10{,}304 & 291 \\
-2025 onwards                  & $-0.475$ & 0.107 & 6{,}752  & 495 \\
+Trailing captures only        & $-0.476$ & 0.125 & 4{,}670 & 428 \\
+Open-weight models            & $-0.582$ & 0.116 & 8{,}873 & 321 \\
+Proprietary models            & $-0.534$ & 0.204 & 10{,}930 & 316 \\
+2025 onwards                  & $-0.527$ & 0.100 & 7{,}906 & 542 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -772,7 +806,8 @@ Cosine      & similarity                         & $0.083$ & 0.086 & 11{,}820 \\
 \section{Counterfactual sensitivity}
 
 Table~\ref{tab:cfgrid} reports the counterfactual across the within-tier substitution
-parameter. The price effect is nearly invariant to $\sigma$, because it is driven by
+parameter, and \texttt{robustness.json} reports it across the size of the outside
+option as well. The price effect is nearly invariant to $\sigma$, because it is driven by
 the composition of the surviving choice set rather than by the strength of
 substitution. The surplus loss falls as $\sigma$ rises, because closer substitutes
 within a capability tier make the proprietary models better replacements for the
