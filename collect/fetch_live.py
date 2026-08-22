@@ -3,7 +3,7 @@ import json, pathlib, time
 
 import requests
 
-RAW = pathlib.Path(__file__).resolve().parents[2] / "data" / "raw"
+RAW = pathlib.Path(__file__).resolve().parents[1] / "data" / "raw"
 BASE = "https://openrouter.ai"
 
 ENDPOINTS = {

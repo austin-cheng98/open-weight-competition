@@ -2,8 +2,8 @@
 moves the proprietary side of the market."""
 import numpy as np
 
-from src.analysis import counterfactual as cfm
-from src.analysis import supply
+from analysis import counterfactual as cfm
+from analysis import supply
 
 BETA, SIGMA = -1.0, 0.4
 

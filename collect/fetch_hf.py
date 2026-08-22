@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 import requests
 
-RAW = pathlib.Path(__file__).resolve().parents[2] / "data" / "raw"
+RAW = pathlib.Path(__file__).resolve().parents[1] / "data" / "raw"
 OUT = RAW / "hf"
 FIELDS = "expand[]=safetensors&expand[]=config&expand[]=downloads&expand[]=createdAt&expand[]=likes"
 

@@ -4,10 +4,10 @@ import pathlib
 import numpy as np
 import pandas as pd
 
-from src.analysis import capability as cap
-from src.analysis import supply
+from analysis import capability as cap
+from analysis import supply
 
-DER = pathlib.Path(__file__).resolve().parents[2] / "data" / "derived"
+DER = pathlib.Path(__file__).resolve().parents[1] / "data" / "derived"
 
 
 def load(measure="spend"):

@@ -5,9 +5,9 @@ import pathlib
 import numpy as np
 import pandas as pd
 
-from src.analysis import capability as cap
+from analysis import capability as cap
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 DER = ROOT / "data" / "derived"
 TIERS = 3
 

@@ -6,10 +6,10 @@ import pathlib
 import numpy as np
 import pandas as pd
 
-from src.analysis import demand
-from src.analysis import supply
+from analysis import demand
+from analysis import supply
 
-DER = pathlib.Path(__file__).resolve().parents[2] / "data" / "derived"
+DER = pathlib.Path(__file__).resolve().parents[1] / "data" / "derived"
 
 
 def cross_section(df=None):

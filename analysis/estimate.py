@@ -6,10 +6,10 @@ import pathlib
 import numpy as np
 import pandas as pd
 
-from src.analysis import capability as cap
-from src.analysis import demand
+from analysis import capability as cap
+from analysis import demand
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 DER = ROOT / "data" / "derived"
 
 CHARS = ["q", "log_ctx", "multimodal", "reasoning", "log_age", "log_latency"]

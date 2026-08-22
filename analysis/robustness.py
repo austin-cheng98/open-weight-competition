@@ -4,11 +4,11 @@ import json, pathlib
 import numpy as np
 import pandas as pd
 
-from src.analysis import capability as cap
-from src.analysis import event_study as es
-from src.analysis.event_study import absorb, cluster_ols
+from analysis import capability as cap
+from analysis import event_study as es
+from analysis.event_study import absorb, cluster_ols
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 DER = ROOT / "data" / "derived"
 
 
@@ -115,8 +115,8 @@ def displacement_long():
 
 def outside_option():
     """The size of the outside option is a modelling choice; this varies it."""
-    from src.analysis import counterfactual as cfm
-    from src.analysis import demand
+    from analysis import counterfactual as cfm
+    from analysis import demand
     df = demand.build_sample()
     d = cfm.cross_section(df)
     tokens = df[df.date == d.date.iloc[0]].tokens.sum()

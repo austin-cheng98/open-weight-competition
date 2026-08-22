@@ -5,9 +5,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 import requests
 
-from src.collect.flight import endpoint_stats, usage_rows
+from collect.flight import endpoint_stats, usage_rows
 
-RAW = pathlib.Path(__file__).resolve().parents[2] / "data" / "raw"
+RAW = pathlib.Path(__file__).resolve().parents[1] / "data" / "raw"
 OUT = RAW / "model_pages"
 STATS_DIR = RAW / "model_stats"
 WORKERS = 6

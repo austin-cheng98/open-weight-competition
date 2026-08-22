@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 
-from src.analysis.event_study import absorb, cluster_ols
+from analysis.event_study import absorb, cluster_ols
 
 LEADS, LAGS = 4, 6
 

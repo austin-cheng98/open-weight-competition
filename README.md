@@ -10,9 +10,9 @@ choice set would cost users.
 ## Layout
 
 ```
-src/collect/    downloads: live endpoints, model pages, Hugging Face, archive captures
-src/build/      panel construction from the raw downloads
-src/analysis/   capability vectors, demand estimation, event studies, counterfactuals
+collect/    downloads: live endpoints, model pages, Hugging Face, archive captures
+build/      panel construction from the raw downloads
+analysis/   capability vectors, demand estimation, event studies, counterfactuals
 data/           raw/ (downloaded, gitignored) and derived/ (analysis panels)
 results.json, robustness.json   the estimates and the robustness checks
 ```
@@ -28,8 +28,8 @@ python run_all.py collect         # re-download everything first
 Modules run as package entry points, so invoke them from the repository root:
 
 ```
-python -m src.analysis.results
-python -m src.analysis.robustness
+python -m analysis.results
+python -m analysis.robustness
 ```
 
 `collect` takes several hours because the Internet Archive endpoints are rate limited;
@@ -46,16 +46,16 @@ Everything comes from public, unauthenticated endpoints:
 - Internet Archive captures of the catalogue and leaderboard, which extend the panel
   back to 2023.
 
-`src/collect/flight.py` parses the streamed render payload that the leaderboard and
-model pages embed; `src/collect/wayback.py` is the rate-limited archive client.
+`collect/flight.py` parses the streamed render payload that the leaderboard and
+model pages embed; `collect/wayback.py` is the rate-limited archive client.
 
 ## Pipeline
 
 | Stage | Modules |
 |---|---|
-| `src.collect` | `fetch_live`, `fetch_model_pages`, `fetch_endpoints`, `fetch_hf`, `fetch_price_history`, `fetch_usage_history` |
-| `src.build` | `build_models`, `build_speed`, `build_supply`, `build_tasks`, `build_panel`, `long_panel` |
-| `src.analysis` | `results`, `robustness` |
+| `collect` | `fetch_live`, `fetch_model_pages`, `fetch_endpoints`, `fetch_hf`, `fetch_price_history`, `fetch_usage_history` |
+| `build` | `build_models`, `build_speed`, `build_supply`, `build_tasks`, `build_panel`, `long_panel` |
+| `analysis` | `results`, `robustness` |
 
 Estimation lives in `capability.py` (capability vectors, similarity, imputation),
 `demand.py` and `estimate.py` (share regressions and instrument diagnostics),

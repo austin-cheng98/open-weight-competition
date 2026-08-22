@@ -5,7 +5,7 @@ import pathlib
 import numpy as np
 import pandas as pd
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 DER = ROOT / "data" / "derived"
 MAX_GAP_DAYS = 10
 

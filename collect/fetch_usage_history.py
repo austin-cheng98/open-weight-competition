@@ -2,10 +2,10 @@
 import json, pathlib, sys
 from datetime import datetime
 
-from src.collect.flight import usage_rows
-from src.collect.wayback import cdx, snapshot
+from collect.flight import usage_rows
+from collect.wayback import cdx, snapshot
 
-RAW = pathlib.Path(__file__).resolve().parents[2] / "data" / "raw"
+RAW = pathlib.Path(__file__).resolve().parents[1] / "data" / "raw"
 OUT = RAW / "usage_history"
 URL = "https://openrouter.ai/rankings"
 GAP_DAYS = 14

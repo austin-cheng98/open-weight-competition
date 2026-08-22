@@ -3,7 +3,7 @@ import json, pathlib
 
 import pandas as pd
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 RAW, DER = ROOT / "data" / "raw", ROOT / "data" / "derived"
 
 

@@ -2,9 +2,9 @@
 OpenRouter catalog endpoint."""
 import json, pathlib, sys
 
-from src.collect.wayback import cdx, snapshot
+from collect.wayback import cdx, snapshot
 
-RAW = pathlib.Path(__file__).resolve().parents[2] / "data" / "raw"
+RAW = pathlib.Path(__file__).resolve().parents[1] / "data" / "raw"
 OUT = RAW / "price_history"
 URL = "https://openrouter.ai/api/v1/models"
 

@@ -4,15 +4,15 @@ import json, pathlib
 import numpy as np
 import pandas as pd
 
-from src.analysis import capability as cap
-from src.analysis import counterfactual as cfm
-from src.analysis import demand
-from src.analysis import estimate as est
-from src.analysis import event_study as es
-from src.analysis import supply
-from src.analysis.event_study import absorb, cluster_ols
+from analysis import capability as cap
+from analysis import counterfactual as cfm
+from analysis import demand
+from analysis import estimate as est
+from analysis import event_study as es
+from analysis import supply
+from analysis.event_study import absorb, cluster_ols
 
-ROOT = pathlib.Path(__file__).resolve().parents[2]
+ROOT = pathlib.Path(__file__).resolve().parents[1]
 DER, OUT = ROOT / "data" / "derived", ROOT / "results.json"
 BETA, SIGMA = -1.0, 0.4          # preferred demand parameters
 
@@ -78,7 +78,7 @@ def stickiness(R):
     R["price_change_median"] = float(sub.loc[ch, "dlp"].median())
     R["n_price_changes"] = int(ch.sum())
     R["n_price_transitions"] = int(sub.dlp.notna().sum())
-    from src.analysis import price_dynamics as pd_
+    from analysis import price_dynamics as pd_
     surv = pd_.survival(pp)
     grid = np.arange(0, 391, 30)
     km = pd_.km(surv, grid)
@@ -122,7 +122,7 @@ def elasticity(R):
         b, se = cluster_ols(yv, Xv, sub.permaslug.factorize()[0])
         R[f"within_elasticity_{tag}"] = float(b[0])
         R[f"within_elasticity_{tag}_se"] = float(se[0])
-    from src.analysis import price_dynamics as pd_
+    from analysis import price_dynamics as pd_
     es, n_ev = pd_.event_study(d)
     R["n_price_events"] = int(n_ev)
     R["price_event_pre"] = float(es.loc[es.k.between(-3, -2), "beta"].mean())
@@ -262,7 +262,7 @@ def frontier(R):
 
 
 def long_horizon(R):
-    from src.analysis import robustness
+    from analysis import robustness
     d = robustness.displacement_long()
     R["n_major_releases"] = int(len(d))
     R["incumbent_growth_median"] = float(d.incumbent_growth.median())
@@ -332,8 +332,8 @@ def instruments(R):
 
 def frontier(R):
     """What a hypothetical open-weight entrant would have to look like to matter."""
-    from src.analysis import counterfactual as cfm
-    from src.analysis import frontier as fr
+    from analysis import counterfactual as cfm
+    from analysis import frontier as fr
     d = cfm.cross_section()
     price = float(d.loc[d.q_index.idxmax(), "p_blend"])
     R["frontier_price"] = price
@@ -345,7 +345,7 @@ def frontier(R):
 
 
 def task_counterfactual(R):
-    from src.analysis import task_counterfactual as tc
+    from analysis import task_counterfactual as tc
     d = tc.run(tc.load(), BETA, SIGMA)
     R["task_cf_price"] = float(np.average(d.d_price, weights=d.weight))
     R["task_cf_cs"] = float(np.average(d.d_cs, weights=d.weight))

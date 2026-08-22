@@ -14,7 +14,7 @@ def run(stage, modules):
     print(f"\n=== {stage} ===", flush=True)
     for m in modules:
         print(f"--- {m}", flush=True)
-        subprocess.run([sys.executable, "-m", f"src.{stage}.{m}"], check=True)
+        subprocess.run([sys.executable, "-m", f"{stage}.{m}"], check=True)
 
 
 if __name__ == "__main__":
