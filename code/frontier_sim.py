@@ -53,7 +53,7 @@ def main():
     prices = np.geomspace(0.02, frontier_p, 25)
     Z = np.array([[simulate(d, r, p)["prop_share"] for p in prices] for r in rhos])
 
-    fig, ax = plt.subplots(figsize=(style.WIDTH * 0.62, 2.3))
+    fig, ax = plt.subplots(figsize=(style.WIDTH * 0.55, 1.9))
     cs = ax.contourf(prices, 100 * rhos, 100 * Z, levels=12, cmap="Blues_r")
     line = ax.contour(prices, 100 * rhos, 100 * Z, levels=[-10, -5, -2],
                       colors=style.INK, linewidths=0.7)
@@ -65,7 +65,7 @@ def main():
     cb.set_label("Change in proprietary token share (%)", fontsize=7)
     cb.ax.tick_params(labelsize=6.5)
     fig.tight_layout()
-    style.save(fig, FIG / "fig5_frontier.pdf")
+    style.save(fig, FIG / "fig7_frontier.pdf")
 
     for rho in (0.0, 0.05, 0.10, 0.20):
         row = [simulate(d, rho, p) for p in (0.05, 0.5, frontier_p)]

@@ -49,7 +49,7 @@ pages embed; `code/wayback.py` is the rate-limited archive client.
 | Collect | `fetch_live`, `fetch_model_pages`, `fetch_endpoints`, `fetch_hf`, `fetch_price_history`, `fetch_usage_history` |
 | Build | `build_models`, `build_speed`, `build_supply`, `build_tasks`, `build_panel`, `long_panel` |
 | Analyse | `results`, `robustness` |
-| Figures | `fig_market`, `fig_prices`, `fig_entry`, `fig_counterfactual` |
+| Figures | `fig_market`, `fig_structure`, `fig_supply`, `fig_prices`, `fig_entry`, `fig_counterfactual`, `frontier_sim` |
 
 Estimation lives in `capability.py` (capability vectors, similarity, imputation),
 `demand.py` and `estimate.py` (share regressions and instrument diagnostics),

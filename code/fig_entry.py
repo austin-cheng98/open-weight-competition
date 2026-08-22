@@ -32,7 +32,10 @@ def volume_panel(ax):
     ax.stackplot(piv.index, [piv[c] for c in order], colors=colours, alpha=0.9,
                  labels=labels, edgecolor="white", linewidth=0.4)
     ax.set_ylabel("Tokens served per day (trillions)")
-    ax.legend(loc="upper left", handlelength=1.1, handletextpad=0.5, labelspacing=0.25)
+    ax.set_ylim(0, 1.42 * piv.sum(axis=1).max())
+    ax.legend(loc="upper left", handlelength=1.1, handletextpad=0.5,
+              labelspacing=0.25, ncol=2, columnspacing=0.9, fontsize=6.6,
+              framealpha=0.0)
     ax.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday=mdates.MO, interval=1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
     ax.margins(x=0)
@@ -67,11 +70,11 @@ def diversion_panel(ax):
 
 
 def main():
-    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 2.25))
+    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 1.62))
     volume_panel(axes[0])
     r, ev = diversion_panel(axes[1])
     fig.tight_layout(w_pad=1.6)
-    style.save(fig, FIG / "fig3_entry.pdf")
+    style.save(fig, FIG / "fig5_entry.pdf")
     post = r[r.tau >= 0]
     print(f"{len(ev)} events; mean post-release coefficient "
           f"{post.beta.mean():.3f}, mean 95% half-width {1.96 * post.se.mean():.3f}")

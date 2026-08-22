@@ -19,7 +19,7 @@ BETA = cfm.__dict__.get("BETA", -1.0)
 def main():
     df = demand.build_sample()
     d = cfm.cross_section(df)
-    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 2.35),
+    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 1.65),
                              gridspec_kw={"width_ratios": [1.15, 1]})
 
     tk = tc.run(tc.load(), BETA, 0.4).sort_values("open_share")
@@ -59,7 +59,7 @@ def main():
     ax2.set_ylim(bottom=0)
     ax2.legend(loc="upper right", handlelength=1.2, handletextpad=0.5, labelspacing=0.25)
     fig.tight_layout(w_pad=1.5)
-    style.save(fig, FIG / "fig4_counterfactual.pdf")
+    style.save(fig, FIG / "fig6_counterfactual.pdf")
     print(f"aggregate: price +{dp[8]:.0f}% and surplus {dcs[8]:.0f}% at sigma=0.40")
     print(f"task level: price +{100 * np.average(tk.d_price, weights=tk.weight):.1f}%, "
           f"surplus {100 * np.average(tk.d_cs, weights=tk.weight):.1f}%")

@@ -81,7 +81,7 @@ def main():
     panel = pd.read_csv(DER / "panel_long.csv", parse_dates=["date"])
     es, n_ev = event_study(panel)
 
-    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 2.2))
+    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 1.6))
     ax = axes[0]
     ax.step(grid, s_open, where="post", color=style.INK, lw=1.6)
     ax.fill_between(grid, 0, s_open, step="post", color=style.GREY, alpha=0.14, lw=0)
@@ -100,7 +100,7 @@ def main():
         ax2.set_xlabel("Observations since the price change")
         ax2.set_ylabel("Response of log volume")
     fig.tight_layout(w_pad=1.6)
-    style.save(fig, FIG / "fig2_prices.pdf")
+    style.save(fig, FIG / "fig4_prices.pdf")
     print(f"price-change events used: {n_ev}")
     if len(es):
         print(es.round(3).to_string(index=False))

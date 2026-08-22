@@ -33,7 +33,7 @@ def main():
     xs = xs[xs.p_blend > 0]
     xs["q_index"], _ = cap.quality_index(xs)
 
-    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 2.35),
+    fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 1.65),
                              gridspec_kw={"width_ratios": [1.32, 1]})
     ax = axes[0]
     tot = xs.tokens.sum()
