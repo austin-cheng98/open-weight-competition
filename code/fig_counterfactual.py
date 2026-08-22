@@ -3,6 +3,7 @@ leave the choice set."""
 import pathlib
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
 import pandas as pd
 
@@ -29,15 +30,19 @@ def main():
     for macro, g in tk.groupby("macro"):
         ax.scatter(100 * g.open_share, 100 * g.d_price, s=14 + 900 * g.weight,
                    c=colours[macro], alpha=0.75, linewidths=0.4, edgecolors="white",
-                   label=macro.capitalize(), zorder=3)
+                   zorder=3)
     z = np.polyfit(tk.open_share, tk.d_price, 1)
     xs_ = np.linspace(tk.open_share.min(), tk.open_share.max(), 20)
     ax.plot(100 * xs_, 100 * np.polyval(z, xs_), color=style.INK, lw=1.1,
             ls=(0, (4, 2)), zorder=2)
     ax.set_xlabel("Open-weight share of task spend (%)")
     ax.set_ylabel("Price increase without open weights (%)")
-    ax.legend(loc="upper left", handletextpad=0.3, borderpad=0.2, labelspacing=0.2,
-              ncol=2, columnspacing=0.8)
+    handles = [Line2D([0], [0], marker="o", linestyle="", markersize=3.6,
+                      markerfacecolor=colours[k], markeredgecolor="white",
+                      markeredgewidth=0.4, label=k.capitalize())
+               for k in ("agent", "code", "data", "general")]
+    ax.legend(handles=handles, loc="upper left", handletextpad=0.3, borderpad=0.2,
+              labelspacing=0.2, ncol=2, columnspacing=0.8)
 
     ax2 = axes[1]
     sig = np.round(np.arange(0.0, 0.75, 0.05), 2)
