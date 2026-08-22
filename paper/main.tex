@@ -498,7 +498,11 @@ data it correlates 0.65 with the capability index, and instrumenting with it mov
 price coefficient from $-0.79$ under ordinary least squares to $-0.27$ despite a
 first-stage $F$ above 900, which is the signature of a violated exclusion restriction
 rather than of a corrected bias. We therefore fix $\beta_p = -1$ and report every
-result across a range of $\sigma$. That value is deliberately conservative: it exceeds
+result across a range of $\sigma$. The diversion test of Section~4 bears on $\sigma$
+from the other direction: finding no differential loss for incumbents in the entrant's
+own capability tier is what proportional reallocation, $\sigma$ near zero, predicts.
+Since the surplus loss is largest at $\sigma = 0$, taking $\sigma = 0.4$ as the
+headline is again the conservative reading. That value is deliberately conservative: it exceeds
 in magnitude both the within-model estimate of Section~3.3 and the adjustment-corrected
 long-run elasticity of about $-0.6$ implied by \eqref{eq:accounting} below, and it is
 close to the value reported by \citet{demirer2025}. Because surplus enters as a log-sum
@@ -754,6 +758,10 @@ $-0.63$. The realised blended price, which mixes posted prices with the model's 
 input-output composition, gives the largest magnitude, as expected if a shift toward
 prompt-heavy workloads lowers the average price per token and raises volume at the
 same time; the fixed-weight index removes that channel and is our preferred measure.
+
+The estimate is not driven by any one model: dropping each of the 268 models whose
+price ever moves, one at a time, leaves it between $-0.58$ and $-0.51$. Restricting to
+models holding at least 0.01\% of tokens gives $-0.378$ (s.e.\ 0.127).
 
 Two further checks bear on the elasticity. A price cut may accompany the launch of a
 replacement by the same provider, which would depress the old model's volume for

@@ -39,6 +39,21 @@ def elasticity_variants():
     return pd.DataFrame(rows)
 
 
+def leave_one_out():
+    """How much any single model drives the elasticity."""
+    d = pd.read_csv(DER / "panel_long.csv", parse_dates=["date"])
+    d["day"] = d.date.astype(str)
+    movers = d.groupby("permaslug").ln_p.std()
+    movers = movers[movers > 0].index
+    out = []
+    for m in movers:
+        s = d[d.permaslug != m]
+        yv, Xv = absorb(s, "ln_tokens", ["ln_p"], ["permaslug", "day"])
+        b, _ = cluster_ols(yv, Xv, s.permaslug.factorize()[0])
+        out.append(b[0])
+    return np.array(out)
+
+
 def successor_check():
     """Price cuts may coincide with a provider launching a replacement model."""
     d = pd.read_csv(DER / "panel_long.csv", parse_dates=["date"])
@@ -151,6 +166,9 @@ def main():
     sc, share = successor_check()
     print(f"\nSuccessor releases (share of observations {share:.3f})\n"
           + sc.round(3).to_string(index=False))
+    lo = leave_one_out()
+    print(f"\nLeave-one-model-out elasticity: min {lo.min():.3f} max {lo.max():.3f} "
+          f"across {len(lo)} models")
     oo = outside_option()
     print("\nOutside-option sensitivity\n" + oo.round(3).to_string(index=False))
     dl = displacement_long()
@@ -160,7 +178,9 @@ def main():
         {"elasticity": e.to_dict("records"), "diversion": v.to_dict("records"),
          "successor": sc.to_dict("records"), "successor_share": share,
          "displacement_long": dl.to_dict("records"),
-         "outside_option": oo.to_dict("records")}, indent=1, default=float))
+         "outside_option": oo.to_dict("records"),
+         "leave_one_out": {"min": float(lo.min()), "max": float(lo.max()),
+                           "n": int(len(lo))}}, indent=1, default=float))
 
 
 if __name__ == "__main__":
