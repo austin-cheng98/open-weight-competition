@@ -37,7 +37,7 @@ def main():
             ls=(0, (4, 2)), zorder=2)
     ax.set_xlabel("Open-weight share of task spend (%)")
     ax.set_ylabel("Price increase without open weights (%)")
-    handles = [Line2D([0], [0], marker="o", linestyle="", markersize=4.6,
+    handles = [Line2D([0], [0], marker="o", linestyle="", markersize=6.0,
                       markerfacecolor=colours[k], markeredgecolor="white",
                       markeredgewidth=0.4, label=k.capitalize())
                for k in ("agent", "code", "data", "general")]
