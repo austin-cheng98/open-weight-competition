@@ -337,7 +337,11 @@ def task_counterfactual(R):
     R["task_cf_cs"] = float(np.average(d.d_cs, weights=d.weight))
     R["task_cf_slope"] = float(np.polyfit(d.open_share, d.d_price, 1)[0])
     R["task_cf_by_macro"] = {
-        m: float(np.average(g.d_price, weights=g.weight))
+        m: {"open_share": float(np.average(g.open_share, weights=g.weight)),
+            "d_price": float(np.average(g.d_price, weights=g.weight)),
+            "d_cs": float(np.average(g.d_cs, weights=g.weight)),
+            "weight": float(g.weight.sum()),
+            "n": int(len(g))}
         for m, g in d.groupby("macro")}
     return R
 

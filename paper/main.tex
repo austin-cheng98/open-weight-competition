@@ -112,14 +112,13 @@
 \maketitle
 
 \begin{abstract}
-Open-weight models are widely expected to constrain the pricing power of proprietary
-model providers, but the mechanism has not been measured. We assemble a market-wide
-panel of the models served by a large inference router, covering posted prices,
-capability benchmarks, weight-release status and revealed usage for \Nactive{} models and
-extended back to 2023 with archived catalogues. Three results follow. Competition works through
-releases rather than repricing. \NeverRepriced\% of models are never repriced at all, and
-a posted price changes in only \MonthlyFreq\% of model-months, even though changing it
-costs a provider nothing. When prices do change, volume responds weakly. The own-price
+Open-weight models are widely expected to constrain the pricing power of proprietary model
+providers, but the mechanism has not been measured. We assemble a market-wide panel of the
+models served by a large inference router, covering posted prices, capability benchmarks,
+weight-release status and revealed usage for \Nactive{} models and extended back to 2023 with
+archived catalogues. Competition works through releases rather than repricing.
+\NeverRepriced\% of models are never repriced at all, and a posted price changes in only
+\MonthlyFreq\% of model-months, even though changing it costs a provider nothing. When prices do change, volume responds weakly. The own-price
 elasticity is \ElastTok{} (s.e.\ \ElastTokSE), identified from \NRevisions{} revisions
 with model and date fixed effects. And entry does not displace incumbents. Over four weeks,
 models released inside the window took \EntrantShare\% of tokens while incumbent volume
@@ -144,14 +143,13 @@ unit of measured intelligence and a proliferation of suppliers, and \citet{nagle
 that much proprietary usage sits on models dominated on price and measured capability by an
 open alternative.
 
-Both of those results describe the allocation of demand across models at a point in
-time. Neither identifies the channel through which open weights would constrain
-proprietary pricing, and the two candidate channels have opposite implications for
-policy. If open weights force incumbents to cut posted prices, the constraint is visible
-in the price series of established models and its strength can be read off their price
-responses. If instead open weights capture new demand while incumbents hold their
-prices, the constraint operates on the terms at which the market grows, and any
-measurement based on incumbent price responses will find nothing.
+Both results describe the allocation of demand across models at a point in time. Neither
+identifies the channel through which open weights would constrain proprietary pricing, and
+the two candidates have opposite implications for policy. If open weights force incumbents to
+cut posted prices, the constraint is visible in the price series of established models. If
+instead open weights capture new demand while incumbents hold their prices, the constraint
+operates on the terms at which the market grows, and any measurement built on incumbent price
+responses will find nothing.
 
 We assemble a panel that separates the two, combining the current cross-section of a large
 inference router (\Nactive{} models with observed usage, \Nopen{} of them open-weight), a
@@ -262,27 +260,47 @@ $e_{jt} = (p^{\text{in}}_{jt} I_{jt} + p^{\text{out}}_{jt} O_{jt})/10^6$.
 
 \subsection{Sample and market definition}
 
-Table~\ref{tab:summary} in the appendix summarises the estimation sample. The platform is
+Table~\ref{tab:summary} summarises the estimation sample. The platform is
 one segment of the market for inference, excluding traffic sent directly to a provider's own
 API and consumer subscription products, and its users are developers who have chosen a
 router. That selects for price sensitivity and willingness to switch, so the segment we
 observe is the one in which open-weight substitution is easiest.
+
+\begin{table}[t]
+\caption{The estimation sample, measured on the last complete day of the daily panel. Prices
+are dollars per million tokens for the blended mix of \eqref{eq:price}. Capability is the
+index \eqref{eq:index}. Shares are within the estimation sample, which covers \CovScored\% of
+platform tokens.}
+\label{tab:summary}
+\centering
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+& Models & Median & Median & Median context & Token & Spend \\
+& & price & capability & (thousands) & share & share \\
+\midrule
+Open-weight   & 86 & 0.29 & 30.5 & 256 & 0.73 & 0.32 \\
+Proprietary   & 86 & 1.50 & 36.6 & 400 & 0.27 & 0.68 \\
+\midrule
+All scored    & 172 & 0.59 & 33.4 & 262 & 1.00 & 1.00 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Market structure}
 
 \subsection{Prices and capability}
 
 Figure~\ref{fig:market} places every model with usage on the price-capability plane. At any
-capability level below the frontier, prices differ by one to two orders of magnitude, so
-posted price is far from a sufficient statistic for what users buy, and the open-weight side
-is systematically cheaper. Matching each proprietary model to the open-weight models within
-two points of it on the capability index, the median proprietary model costs
-\MatchedRatio{} times the median open alternative, and \MatchedWeighted{} times weighted
-by volume. Averaged over actual usage a token from an open-weight model costs
-\$\RealisedOpen{} per million against \$\RealisedClosed{}. These gaps are smaller than
-the ninety percent difference reported for 2025 data \citep{demirer2025,nagle2025}, as one
-would expect if proprietary providers have since released cheaper tiers, and comparing only
-the cheapest option at each capability level narrows the gap to \PriceRatio{} times.
+capability level below the frontier, prices differ by one to two orders of magnitude, so posted
+price is far from a sufficient statistic for what users buy, and the open-weight side is
+systematically cheaper. Matching each proprietary model to the open-weight models within two
+points of it on the capability index, the median proprietary model costs \MatchedRatio{} times
+the median open alternative, and \MatchedWeighted{} times weighted by volume. Averaged over
+usage a token from an open-weight model costs \$\RealisedOpen{} per million against
+\$\RealisedClosed{}. These gaps are smaller than the ninety percent difference reported for
+2025 data \citep{demirer2025,nagle2025}, as one would expect if proprietary providers have
+since released cheaper tiers.
 
 \begin{figure}[t]
 \centering
@@ -342,11 +360,10 @@ cheapest.
 
 The archived catalogues let us follow the posted price of a model version from its first
 appearance. Between consecutive captures, a median of three days apart, the price changes
-\ChangeRate\% of the time, and over a model's observed life \NeverRepriced\% of models
-never change price at all. The left panel of Figure~\ref{fig:prices} shows the survival of
-the launch price. \SurvSix\% of models are still at their launch price after six months and
-\SurvTwelve\% after a year. Conditional on a change the median revision is a cut of about
-\MedianCut{} log points, and \CutShare\% of changes are cuts.
+\ChangeRate\% of the time, and \NeverRepriced\% of models never change price at all. The
+left panel of Figure~\ref{fig:prices} shows \SurvSix\% of models still at their launch price
+after six months and \SurvTwelve\% after a year. Conditional on a change the median revision
+is a cut of about \MedianCut{} log points, and \CutShare\% of changes are cuts.
 
 \begin{figure}[t]
 \centering
@@ -471,23 +488,21 @@ also contains post-release interactions with the incumbent's own capability and 
 
 We find no diversion. The estimate of $\beta$ is $0.01$ (s.e.\ $0.07$), and the event-time
 path in the right panel of Figure~\ref{fig:entry} is flat on both sides of the release. The
-confidence interval excludes differential declines larger than \DiversionMDE{} log points
-per unit of exposure, tightening to 0.10 and 0.04 under the Euclidean and cosine measures
-in Table~\ref{tab:divrobust}. Ten releases over four weeks bound the effect
-rather than pin it down, but the aggregate pattern is unambiguous. At this rate of growth
-the displacement channel is small relative to expansion.
+confidence interval excludes differential declines larger than \DiversionMDE{} log points per
+unit of exposure, tightening to 0.10 and 0.04 under the Euclidean and cosine measures in
+Table~\ref{tab:divrobust}. Ten releases bound the effect rather than pin it down, but at this
+rate of growth the displacement channel is plainly small relative to expansion.
 
 \subsection{Longer-horizon estimates}
 
-The archived panel lets us look further out, over horizons at which displacement would
-plausibly appear. We take the \NMajor{} open-weight releases that reached at least one
-percent of platform tokens and compare aggregate volume of models already in the market over
-the eight weekly observations before and after each. Incumbent volume fell in
-\IncDeclineShare\% of these episodes, and the median change was $+\IncGrowthLong{}$ log
+The archived panel lets us look further out. We take the \NMajor{} open-weight releases that
+reached at least one percent of platform tokens and compare aggregate volume of models already
+in the market over the eight weekly observations before and after each. Incumbent volume fell
+in \IncDeclineShare\% of these episodes, and the median change was $+\IncGrowthLong{}$ log
 points against a median market change of $+\MktGrowthLong{}$. DeepSeek R1
 \citep{deepseek2025} is the sharpest case, with platform volume rising 0.56 log points over
-the sixteen weeks around it while incumbent volume held flat at $-0.03$. Incumbents lose
-share because the market grows around them, but they do not lose volume.
+the sixteen weeks around it while incumbent volume held flat at $-0.03$. Incumbents lose share
+because the market grows around them, not because they lose volume.
 
 \section{Demand system and counterfactuals}
 
@@ -512,8 +527,8 @@ with mean utility
 \label{eq:delta}
 \end{equation}
 where $x_j$ collects the capability index, context length, modality, reasoning support,
-latency and age, and the outside option is the unscored fringe holding \CFoutside\% of
-tokens. Observed shares invert to mean utilities \citep{berry1994},
+latency and age, and the outside option is the unscored fringe holding \CFoutside\% of tokens.
+Shares invert to mean utilities \citep{berry1994},
 \begin{equation}
 \delta_j = \log s_j - \log s_0 - \sigma \log s_{j \mid g(j)} ,
 \label{eq:inversion}
@@ -538,35 +553,30 @@ quality. Parameter count, the obvious cost shifter, correlates 0.65 with the cap
 and moves the price coefficient from $-0.79$ under least squares to $-0.27$ despite a
 first-stage $F$ above 900, a violated exclusion restriction rather than a corrected bias.
 
-We therefore fix $\beta_p = -1$ and report every result across a range of $\sigma$, the
-sensitivity analysis recommended for demand systems with weak instruments
+We therefore fix $\beta_p = -1$ and report every result across a range of $\sigma$
 \citep{nevo2000,conlon2020}. Both choices are conservative. The price coefficient exceeds in
-magnitude the within-model estimate of Section~4.2 and the adjustment-corrected long-run
-elasticity of about $-0.6$ implied by \eqref{eq:accounting}, and because surplus enters
-\eqref{eq:cs} divided by $|\beta_p|$ a larger magnitude yields a smaller dollar figure. The
-diversion result of Section~\ref{sec:entry} bears on $\sigma$ from the other direction,
-since finding no differential loss within the entrant's own capability tier is what
-proportional reallocation, $\sigma$ near zero, predicts, and the surplus loss is largest
-there. Taking $\sigma = 0.4$ is again the conservative reading.
+magnitude the within-model estimate of Section~4.2 and the long-run elasticity of about $-0.6$
+implied by \eqref{eq:accounting}, and because surplus enters \eqref{eq:cs} divided by
+$|\beta_p|$ a larger magnitude yields a smaller dollar figure. Finding no differential loss
+within the entrant's own capability tier is what $\sigma$ near zero predicts, and the surplus
+loss is largest there, so $\sigma = 0.4$ is conservative too.
 
 \subsection{Removing open-weight models}
 
-Removing open-weight models from the choice set at posted prices, the average price paid
-per token rises from \$0.70 to \$1.80, an increase of \CFprice\%. Consumer surplus
-\eqref{eq:cs} falls \CFcs\%, worth about \$\CFdollars{}m per day at the platform's current
-volume. The percentage change in surplus does not depend on $\beta_p$, which enters the
-baseline and the counterfactual identically, and only the conversion into dollars scales
-with it. The loss is larger when substitution within a capability tier is weaker, ranging from
-\$3.9m to \$1.3m per day as $\sigma$ moves from 0 to 0.7 (Figure~\ref{fig:cf} and
-Table~\ref{tab:cfgrid}). Raising the outside share from the observed \CFoutside\% to
-50\% raises the proportional surplus loss from \CFcs\% to 47\% while lowering the dollar
-figure to \$1.0m per day. The price effect is invariant to both, because it is governed by
+Removing open-weight models from the choice set at posted prices, the average price paid per
+token rises from \$0.70 to \$1.80, an increase of \CFprice\%. Consumer surplus
+\eqref{eq:cs} falls \CFcs\%, worth about \$\CFdollars{}m per day at current volume. The
+percentage change does not depend on $\beta_p$, which enters the baseline and the
+counterfactual identically, and only the conversion into dollars scales with it. The loss runs
+from \$3.9m to \$1.3m per day as $\sigma$ moves from 0 to 0.7 (Table~\ref{tab:cfgrid}), and
+raising the outside share from the observed \CFoutside\% to 50\% raises the proportional loss
+from \CFcs\% to 47\% while lowering the dollar figure to \$1.0m per day. The price effect is invariant to both, because it is governed by
 the composition of the surviving choice set rather than by the strength of substitution.
 Concentration moves against the presumption that open weights fragment the market.
 $H^{\text{tok}}$ rises from \CFhhiBase{} to \CFhhiCf{}, because open-weight volume is
 spread across more suppliers than the proprietary volume that replaces it.
 
-\begin{figure}[t]
+\begin{figure}[b]
 \centering
 \includegraphics[width=\textwidth]{../figures/fig7_counterfactual.pdf}
 \caption{Left, for each of the \Ntasks{} task markets, the price increase implied by
@@ -589,85 +599,97 @@ slope of 0.98. Weighted by spending, prices rise \TaskCFprice\% and surplus fall
 hold about a third of spending, and the smallest in data extraction and transformation, where
 they hold under a sixth. These are smaller than the aggregate because task shares are
 measured on spending, which weights the expensive proprietary models that open weights do not
-displace.
+displace. Table~\ref{tab:tasks} groups the tasks into families. The effect tracks
+open-weight penetration closely, reaching 20\% in coding work and 7\% in data
+extraction and transformation.
+
+\begin{table}[t]
+\caption{The open-weight counterfactual inside each family of task markets, weighted by each
+task's share of platform spending. Shares and changes are averages over the tasks in the
+family.}
+\label{tab:tasks}
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Task family & Tasks & Share of spending & Open-weight share & Price without open \\
+\midrule
+Agent   & 5  & 0.29 & 0.33 & $+19\%$ \\
+Code    & 9  & 0.30 & 0.31 & $+20\%$ \\
+General & 12 & 0.22 & 0.25 & $+19\%$ \\
+Data    & 2  & 0.09 & 0.15 & $+7\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Interpretation}
 
 \subsection{An accounting framework}
 
 The three results fit together through the share of demand that is in play. Let $M_t$ be
-total demand, growing at rate $g$ per period, and let a fraction $\phi$ of existing demand
-be revisited each period, whether because a workload is rebuilt or because a team
-re-evaluates its choice. Contestable demand is $(g + \phi) M_t$, and a model's volume
-evolves as
+total demand growing at rate $g$ per period, and let a fraction $\phi$ of existing demand be
+revisited each period as workloads are rebuilt or re-evaluated. Contestable demand is
+$(g + \phi) M_t$, and a model's volume evolves as
 \begin{equation}
 y_{j,t+1} = (1 - \phi)\, y_{jt} + \nu_j \,(g + \phi)\, M_t ,
 \label{eq:accounting}
 \end{equation}
-where $\nu_j$ is its share of contestable demand. Three implications follow. An incumbent
-loses volume only when $\nu_j (g+\phi) M_t < \phi\, y_{jt}$, that is, when its share of
-contestable demand falls below $\phi/(g+\phi)$ times its share of the stock. With $g \approx
-0.13$ per week in our window, an incumbent holding an average share of new demand keeps
-growing. An entrant reaches a share of about $\nu_k (g+\phi)/(1+g)$ after one period,
-so entrants can take a large share of volume quickly without anyone shrinking. And a
-permanent price change reaches only the contestable margin, so the response measured $\tau$
-periods out is attenuated by roughly $1 - (1-\phi-g)^{\tau}$ relative to its long-run
-value.
+where $\nu_j$ is its share of contestable demand. An incumbent loses volume only when
+$\nu_j (g+\phi) M_t < \phi\, y_{jt}$, so with $g \approx 0.13$ per week in our window an
+incumbent holding an average share of new demand keeps growing. An entrant reaches a share of
+about $\nu_k (g+\phi)/(1+g)$ after one period, taking volume quickly without anyone
+shrinking. And a permanent price change reaches only the contestable margin, so the response
+measured $\tau$ periods out is attenuated by roughly $1 - (1-\phi-g)^{\tau}$ relative to
+its long-run value.
 
 That last point bounds how much of the inelasticity is an artefact of slow adjustment. With
 $\phi + g \approx 0.23$ per week and the six weekly observations over which
-Figure~\ref{fig:prices} shows the response settling, the attenuation factor is about 0.8,
-so the implied long-run elasticity is near $-0.6$. Demand is inelastic even after
-adjustment, so the first-order condition of a provider maximising current profit is not
-satisfied at the posted price. Either providers price against a margin we do not observe,
-such as capacity or the option value of usage, or the posted price is not chosen to maximise
-current profit at all, and the rigidity of Section~4.1 favours the second.
-
-\subsection{Relation to existing estimates}
+Figure~\ref{fig:prices} shows the response settling, the attenuation factor is about 0.8 and
+the implied long-run elasticity is near $-0.6$. Demand is inelastic even after adjustment, so
+the first-order condition of a provider maximising current profit is not satisfied at the
+posted price. Either providers price against a margin we do not observe, or the posted price
+is not chosen to maximise current profit at all, and the rigidity of Section~4.1 favours the
+second.
 
 The foregone savings \citet{nagle2025} identify are a puzzle if demand adjusts quickly and
 are exactly what one should expect when the short-run elasticity is about one-half and
 switching a workload is costly. They accrue as workloads turn over rather than as incumbents
-reprice. Our price-of-capability gaps are smaller than theirs and than those of
-\citet{demirer2025}, consistent with proprietary providers having released cheaper tiers
-since and with the rebound in the open-weight volume share in
-Figure~\ref{fig:structure}.
+reprice. Our price-of-capability gaps are smaller than theirs, consistent with proprietary
+providers having released cheaper tiers since and with the rebound in the open-weight volume
+share in Figure~\ref{fig:structure}.
 
 \subsection{Limitations}
 
-Three qualifications bound what the estimates cover. The market is one router, and one that
-selects for price-sensitive developers, so the elasticities and the counterfactual describe
-the segment where substitution toward open weights is easiest. The demand parameters are
-calibrated rather than estimated, which is why every counterfactual is reported over a range
-and at conservative values. And four weeks of releases support a bound on diversion rather
-than a point estimate, since the staggered-entry estimators that handle heterogeneous
-treatment timing \citep{callaway2021,dechaisemartin2020,sun2021,borusyak2024} need more
-events than the window provides. A large release observed over a longer window would sharpen
-all three.
+Three qualifications bound what the estimates cover. The market is one router that selects
+for price-sensitive developers, so the estimates describe the segment where substitution
+toward open weights is easiest. The demand parameters are calibrated rather than estimated,
+which is why every counterfactual is reported over a range and at conservative values. And
+four weeks of releases support a bound on diversion rather than a point estimate, since the
+staggered-entry estimators that handle heterogeneous treatment timing
+\citep{callaway2021,dechaisemartin2020,sun2021,borusyak2024} need more events than the window
+provides.
 
 \section{Conclusion}
 
-Open-weight models constrain proprietary providers on a margin that the usual measurement
-misses. Posted prices in this market behave like a fixed characteristic of a model version. More
-than half of models are never repriced, and the monthly frequency of a change is comparable
-to groceries in a setting where changing the number costs nothing. Demand
-explains why. The within-model elasticity, identified from the revisions that do occur, is
-about one-half, and correcting for slow reallocation moves it only to $-0.6$. A provider
-gains little volume from cutting the price of a model already in the field, and so does not
-cut it. Entry, meanwhile, is absorbed by growth. Over four weeks, models released inside
-the window took more than a quarter of platform tokens while incumbent volume rose, and we
-find no differential loss for the incumbents nearest an entrant in capability space. Across
-nineteen major open-weight releases going back to 2024, incumbent volume fell in fewer than a
-third of episodes.
+Open-weight models constrain proprietary providers on a margin the usual measurement misses.
+Posted prices behave like a fixed characteristic of a model version. More than half of models
+are never repriced, and the monthly frequency of a change is comparable to groceries in a
+setting where changing the number costs nothing. Demand explains why. The within-model
+elasticity is about one-half, and correcting for slow reallocation moves it only to $-0.6$, so
+a provider gains little volume from cutting the price of a model already in the field and does
+not cut it. Entry is absorbed by growth. Over four weeks, models released inside the window took more
+than a quarter of platform tokens while incumbent volume rose, and we find no differential
+loss for the incumbents nearest an entrant. Across nineteen major open-weight releases since
+2024, incumbent volume fell in fewer than a third of episodes.
 
 The constraint is nonetheless large. Removing open-weight models from an estimated demand
-system raises the average price paid per token by more than half again and costs users
-roughly a fifth of their surplus, on the order of a million dollars a day on one platform,
-with the largest effects in agentic and coding work. It also raises provider concentration
-rather than lowering it, because open-weight volume is spread across more suppliers than
-the proprietary volume that would replace it. An assessment of open-weight competition
-built on incumbent price responses will therefore find nothing, not because the constraint
-is absent but because it operates on the price at which the next unit of demand is served.
+system raises the average price paid per token by more than half again and costs users roughly
+a fifth of their surplus, on the order of a million dollars a day on one platform, with the
+largest effects in agentic and coding work. It also raises provider concentration rather than
+lowering it, because open-weight volume is spread across more suppliers than the proprietary
+volume that would replace it. An assessment built on incumbent price responses will therefore
+find nothing, not because the constraint is absent but because it operates on the price at
+which the next unit of demand is served.
 
 \bibliographystyle{plainnat}
 \begin{thebibliography}{99}
@@ -939,27 +961,6 @@ nearest date within ten days. Openness is taken from the current catalogue where
 is still listed, because the weight-repository field is absent from the earliest captures.
 Prices are dollars per million tokens throughout.
 
-\begin{table}[h]
-\caption{The estimation sample, measured on the last complete day of the daily panel.
-Prices are dollars per million tokens for the blended mix of \eqref{eq:price}. Capability
-is the index \eqref{eq:index}. Shares are within the estimation sample, which covers
-\CovScored\% of platform tokens.}
-\label{tab:summary}
-\centering
-\small
-\begin{tabular}{lrrrrrr}
-\toprule
-& Models & Median & Median & Median context & Token & Spend \\
-& & price & capability & (thousands) & share & share \\
-\midrule
-Open-weight   & 86 & 0.29 & 30.5 & 256 & 0.73 & 0.32 \\
-Proprietary   & 86 & 1.50 & 36.6 & 400 & 0.27 & 0.68 \\
-\midrule
-All scored    & 172 & 0.59 & 33.4 & 262 & 1.00 & 1.00 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
 \section{Capability imputation}
 
 Benchmark scores are missing for smaller models. For each missing dimension we fit a ridge
@@ -1078,10 +1079,7 @@ $\beta_p = -1$ and $\sigma = 0.4$. Contours mark 2, 5 and 10 percent losses.}
 
 Table~\ref{tab:cfgrid} reports the counterfactual across the within-tier substitution
 parameter, and \texttt{robustness.json} reports it across the size of the outside option as
-well. The price effect is nearly invariant to $\sigma$, because it is driven by the
-composition of the surviving choice set rather than by the strength of substitution. The
-surplus loss falls as $\sigma$ rises, because closer substitutes within a capability tier
-make the proprietary models better replacements for the open-weight models that leave.
+well.
 
 \begin{table}[h]
 \caption{The open-weight counterfactual across substitution parameters, at $\beta_p = -1$.

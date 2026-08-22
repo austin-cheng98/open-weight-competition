@@ -21,7 +21,7 @@ def main():
 
     fig, axes = plt.subplots(1, 2, figsize=(style.WIDTH, 1.7))
     ax = axes[0]
-    bins = np.array([1, 2, 3, 5, 9, 17, 33, 65])
+    bins = np.array([1, 2, 3, 5, 9, 17])
     for openw, colour, label, off in ((False, style.CLOSED, "Proprietary", -0.18),
                                       (True, style.OPEN, "Open-weight", 0.18)):
         s = d[d.open_weight == openw]
@@ -31,11 +31,12 @@ def main():
         ax.bar(np.arange(len(bins)) + off, 100 * w, width=0.36, color=colour,
                label=label)
     ax.set_xticks(np.arange(len(bins)))
-    ax.set_xticklabels(["1", "2", "3-4", "5-8", "9-16", "17-32", "33-64", "65+"],
-                       fontsize=6.6)
+    ax.set_xticklabels(["1", "2", "3-4", "5-8", "9-16", "17+"], fontsize=6.6)
     ax.set_xlabel("Independent hosting providers")
     ax.set_ylabel("Share of tokens (%)")
-    ax.legend(loc="upper left", handlelength=1.1, handletextpad=0.5)
+    ax.set_ylim(0, 1.28 * 100 * 0.42)
+    ax.legend(loc="upper center", handlelength=1.1, handletextpad=0.5,
+              ncol=2, columnspacing=0.9, fontsize=6.8)
     ax.grid(axis="x", visible=False)
 
     ax2 = axes[1]
